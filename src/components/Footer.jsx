@@ -14,7 +14,9 @@ import {
   } from "@material-ui/icons";
 
 const Container = styled.div`
-
+    background-color: var(--main-color);
+    color: gray;
+    margin-top: 100px;
 `
 const Wrapper = styled.div`
     display: flex;
@@ -41,8 +43,8 @@ const SocialContainer = styled.div`
 `;
 
 const SocialIcon = styled.div`
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     color: white;
     background-color: #${props=>props.color};
@@ -178,7 +180,7 @@ const Footer = () => {
         </Wrapper>
 
             <Bottom>
-                <div>©2021 Phoebe Yu</div>
+                <div style={{color:"gray"}}>©2021 Phoebe Yu</div>
 
             </Bottom>
         </Container>
