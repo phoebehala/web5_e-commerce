@@ -8,9 +8,16 @@ import Categories from '../components/Categories';
 import Footer from '../components/Footer';
 import ProductsSlide from '../components/ProductsSlide';
 
+// style
+import styled from 'styled-components';
+
+const Container = styled.div`
+  overflow: hidden;
+`
+
 const Home = () => {
   return (
-    <div>
+    <Container>
         <Announcement />
         <Navbar/>
         <Header/>
@@ -19,7 +26,7 @@ const Home = () => {
         <Footer />
 
 
-    </div>
+    </Container>
   )
 }
 

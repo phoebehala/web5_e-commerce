@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import {mobile, tablet} from '../util/responsive';
 
-
+// define Image before Container to make   &:hover ${Image }{} take effect
 const Image = styled.img`
     width: 100%;
     height: 100%;
@@ -41,7 +41,6 @@ const Container = styled.div`
     position: relative;
 
     transition: all .3s ease-in-out;
-
     &:hover ${Image}{
         opacity: 0.5;
     };
@@ -84,15 +83,11 @@ const Title = styled.h1`
 const CategoryItem = ( {item, key} ) => {
     return (
         <Container>
-
-
-                <Image src={item.img}/>
-                <Info>
-                    <Title>{item.title}</Title>
-                    <Button>SHOP NOW</Button>
-                </Info>
-                
-
+            <Image src={item.img}/>
+            <Info>
+                <Title>{item.title}</Title>
+                <Button>SHOP NOW</Button>
+            </Info>
         </Container>
       );
 };
