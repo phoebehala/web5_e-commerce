@@ -2,7 +2,7 @@ import React from 'react'
 
 // style
 import styled from 'styled-components';
-import {tablet} from '../util/responsive';
+import {mobile, tablet} from '../util/responsive';
 
 //icons
 import {FavoriteBorder, Search, ShoppingCartOutlined} from  '@material-ui/icons'
