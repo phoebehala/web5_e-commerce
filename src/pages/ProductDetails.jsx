@@ -8,6 +8,7 @@ import {mobile, tablet} from '../util/responsive';
 //icons
 import {  Star, StarHalf } from '@material-ui/icons';
 import { KeyboardArrowDown, KeyboardArrowUp } from '@material-ui/icons';
+import { Add, Remove } from "@material-ui/icons";
 
 // components
 import Navbar from '../components/Navbar.jsx';
@@ -135,15 +136,46 @@ const ThumbImg = styled.img`
     border-radius: 5px;
     
 `
+
+
+
+
+const AddContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 50%;
+    margin-top: 10px;
+    ${mobile({ width: "100%" })}
+
+`;
+
+const AmountContainer = styled.div`
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+`;
+const Amount = styled.span`
+    width: 30px;
+    height: 30px;
+
+    border-radius: 5px;
+    border: 1px solid var(--main-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px 5px;
+`;
 const AddToCartBtn = styled.button`
-    background: #333;
+    background: var(--main-color);
     color: white;
     outline: none;
     border: none;
     cursor: pointer;
     padding: 10px 25px;
-    margin-top: 15px;
 `
+
+
 
 // bottom
 const ShowMoreWrapper = styled.div`
@@ -173,6 +205,8 @@ const InfoDesc = styled.p`
         margin-left:2rem ;
     }
 `
+
+
 
 const ProductDetails = () => {
 
@@ -281,7 +315,15 @@ const ProductDetails = () => {
             <Desc>{item.description}</Desc>
             <Desc>{item.content}</Desc>
 
-            <AddToCartBtn>Add to cart</AddToCartBtn>
+            <AddContainer>
+                <AmountContainer>
+                    <Remove />
+                    <Amount>1</Amount>
+                    <Add />
+                </AmountContainer>
+                <AddToCartBtn >ADD TO CART</AddToCartBtn>
+            </AddContainer>
+       
           </Box>
 
         </Details>
