@@ -3,6 +3,7 @@ import React from 'react'
 // style
 import styled from 'styled-components';
 import {mobile, tablet} from '../util/responsive';
+import { Link } from 'react-router-dom';
 
 //icons
 import {FavoriteBorder, Search, ShoppingCartOutlined} from  '@material-ui/icons'
@@ -74,8 +75,12 @@ const Navbar = () => {
             </Left> 
 
             <Right>
-                <MenuItem>REGISTER</MenuItem>
-                <MenuItem>SIGN IN</MenuItem>
+                <Link to="/register" className='react-link'>
+                    <MenuItem>REGISTER</MenuItem>
+                </Link>
+                <Link to="/login" className='react-link'>
+                    <MenuItem>SIGN IN</MenuItem>
+                </Link>
 
                 <MenuItem>
                     <Badge badgeContent={1} color="primary">
