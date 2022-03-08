@@ -71,7 +71,9 @@ const Navbar = () => {
     <Container >
         <Wrapper>
             <Left>
-                <Logo> HALA </Logo>
+                <Link to="/" className='react-link'>
+                    <Logo> HALA </Logo>
+                </Link>
             </Left> 
 
             <Right>
