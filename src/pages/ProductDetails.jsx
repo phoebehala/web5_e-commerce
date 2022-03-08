@@ -26,12 +26,15 @@ const TopWrapper = styled.div`
     margin: 100px auto;
     margin-bottom:0px ;
     box-shadow: 0 0 5px #ccc;
+
 `
 const Details = styled.div`
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    padding: 30px 0;
+    padding: 30px 10px;
+
+    ${tablet({ padding: "30px 0px" })}
 `
 
 const BigImgWrapper = styled.div`
@@ -55,14 +58,16 @@ const Box = styled.div`
 const Row = styled.div`
     display: flex;
     justify-content: space-between;
-    margin-bottom: 15px;
 `
 const RowH2Title = styled.h2`
     text-transform: uppercase;
     letter-spacing: 2px;
 `
-const RowPrice = styled.span`
-    color: crimson;
+const Price = styled.div`
+    color: var(--marron-red);
+    font-weight:600 ;
+    font-size: 1.2rem;
+    margin-bottom:10px ;
 `
 const Colors = styled.div``
 const ClickColorBtn = styled.button`
@@ -104,7 +109,7 @@ const RateReviewerNum = styled.span`
 
 const Desc =styled.p`
     line-height: 1.5;
-    margin: 15px 0;
+    margin:  0  0 15px 0;
 `
 
 const Thumb = styled.div`
@@ -142,20 +147,21 @@ const AddToCartBtn = styled.button`
 
 // bottom
 const ShowMoreWrapper = styled.div`
-    padding:20px ;
+    padding:30px ;
     position: relative;
 `
 const ArrowIcon = styled.div`
     position:absolute;
 
-    bottom:${(props)=>props.direction==="down" && "10px"} ;
+    bottom:${(props)=>props.direction==="down" && "30px"} ;
     
     left:50%;
     transform: translateX(-50%);
 
-
+    color:var(--dark-gray) ;
     border: solid var(--main-color) 1px ;
     border-radius:50%;
+    box-shadow: 0 0 5px #ccc;
     display:flex ;
     
 `
@@ -237,16 +243,11 @@ const ProductDetails = () => {
           <Box>
             <Row>
               <RowH2Title>{item.title}</RowH2Title>
-              <RowPrice>${item.price}</RowPrice>
             </Row>
 
-            {/* <Colors colors={item.colors} /> */}
-            <Colors>
-                {item.colors.map((c,i) =>(
-                    // <ClickColorBtn style={{background:c}} key={index}>{c}</ClickColorBtn>
-                    <ClickColorBtn style={{background:c}} key={i}></ClickColorBtn>
-                ))}
-            </Colors>
+            <Price>${item.price}</Price>
+
+   
 
             <RateWrapper>
                 <RateScore>{item.rating.rate}</RateScore>
@@ -280,13 +281,6 @@ const ProductDetails = () => {
             <Desc>{item.description}</Desc>
             <Desc>{item.content}</Desc>
 
-            <Thumb ref={thumbRef} >
-                {item.src.map((image,i)=>(
-                    <ThumbImg src={image} alt="" key={i}
-                                 onClick={()=>handleClick(i)} 
-                                 />
-                ))}   
-            </Thumb>
             <AddToCartBtn>Add to cart</AddToCartBtn>
           </Box>
 
