@@ -5,6 +5,10 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import {mobile, tablet} from '../util/responsive';
 
+//icons
+import {  Star, StarHalf } from '@material-ui/icons';
+import { KeyboardArrowDown, KeyboardArrowUp } from '@material-ui/icons';
+
 // components
 import Navbar from '../components/Navbar.jsx';
 import Announcement from '../components/Announcement';
@@ -15,10 +19,12 @@ import Products from '../components/Products';
 import {myProducts} from '../data/data'
 
 
-const Container = styled.div`
+
+const TopWrapper = styled.div`
     max-width: 1200px;
     width: 100%;
     margin: 100px auto;
+    margin-bottom:0px ;
     box-shadow: 0 0 5px #ccc;
 `
 const Details = styled.div`
@@ -67,6 +73,35 @@ const ClickColorBtn = styled.button`
     margin-right: 5px;
     cursor: pointer;
 `
+
+
+const RateWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 0.4rem 0;
+`
+const RateScore = styled.span`
+    margin-right: 0.4rem;
+    color: #b4690e;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -.02rem;
+    font-size: 1rem;
+`
+
+const RateStars = styled.div`
+  font-size: 1rem;
+`;
+const RateStar = styled.span``;
+
+const RateReviewerNum = styled.span`
+  color:#6a6f73;
+  margin-left: 0.4rem;
+  font-weight: 400;
+  line-height: 1.2;
+  font-size: 1rem;
+`;
+
 const Desc =styled.p`
     line-height: 1.5;
     margin: 15px 0;
@@ -105,19 +140,53 @@ const AddToCartBtn = styled.button`
     margin-top: 15px;
 `
 
+// bottom
+const ShowMoreWrapper = styled.div`
+    padding:20px ;
+    position: relative;
+`
+const ArrowIcon = styled.div`
+    position:absolute;
+
+    bottom:${(props)=>props.direction==="down" && "10px"} ;
+    
+    left:50%;
+    transform: translateX(-50%);
+
+
+    border: solid var(--main-color) 1px ;
+    border-radius:50%;
+    display:flex ;
+    
+`
+const InfoDesc = styled.p`
+    line-height: 1.5;
+    margin: 15px 0;
+
+    &::first-letter{
+        margin-left:2rem ;
+    }
+`
 
 const ProductDetails = () => {
+
+    // for rating
+    let increment =0;
+    let max =5;
+
+
     const [choosedindex, setChoosedIndex] = useState(0);
 
     // to access DOM
     const thumbRef = useRef();
+
+    const [toggle, setToggle ] =useState(false);
 
     const handleClick = (index)=>{
         //alert(`you choose index ${index}`)
         console.log(`you choose index ${index}`);
         //setChoosedIndex({choosedindex:index})
         setChoosedIndex(index)
-
     /*
         console.log(thumbRef.current)
         console.log(thumbRef.current.children)
@@ -141,14 +210,20 @@ const ProductDetails = () => {
   
         
     }
-    console.log(choosedindex);
+    // console.log("choosedindex",choosedindex);
+
+    const handleShowMore =()=>{
+        setToggle(!toggle)
+        console.log(toggle);
+    }
+
   return (
     <>
 
     <Navbar/>
     <Announcement/>
 
-    <Container>
+    <TopWrapper>
 
     {
       myProducts.map(item =>(
@@ -173,6 +248,35 @@ const ProductDetails = () => {
                 ))}
             </Colors>
 
+            <RateWrapper>
+                <RateScore>{item.rating.rate}</RateScore>
+                <RateStars>
+                    <RateStar>
+                     { [...Array(5)].map((star, index) => {
+
+                       while(increment < item.rating.rate) {
+
+                          if ((item.rating.rate-increment)<1){
+                            increment++;
+                            return (<StarHalf style={{color:"#e59819"}}></StarHalf>)
+                          }
+                          increment++;
+                          return (<Star style={{color:"#e59819"}}></Star>)
+                      }
+                      while(max > item.rating.rate) {        
+                          max--;
+                       
+                          return (<Star style={{color:"gray"}}></Star>)
+                      }
+     
+                    })}                         
+             
+                    </RateStar>
+                </RateStars>
+
+                <RateReviewerNum>(222)</RateReviewerNum>
+            </RateWrapper>
+
             <Desc>{item.description}</Desc>
             <Desc>{item.content}</Desc>
 
@@ -187,9 +291,32 @@ const ProductDetails = () => {
           </Box>
 
         </Details>
+
       ))
     }
-    </Container>
+    </TopWrapper>
+
+    <ShowMoreWrapper>
+        {!toggle && (
+            <ArrowIcon direction="down">
+                <KeyboardArrowDown  style={{width:"50px", height:"100%"}}
+                                    onClick={handleShowMore}/>
+            </ArrowIcon>
+        )}
+
+        {toggle && (
+            <ShowMoreWrapper>
+
+                <InfoDesc>{ myProducts[0].info}</InfoDesc>
+                
+                <ArrowIcon direction="up">
+                    <KeyboardArrowUp style={{width:"50px", height:"100%"}}
+                                      onClick={handleShowMore}></KeyboardArrowUp>
+                </ArrowIcon>
+            
+            </ShowMoreWrapper>
+        )}
+    </ShowMoreWrapper>
 
     <Footer />
   </>
