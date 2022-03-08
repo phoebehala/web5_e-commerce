@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from "react";
+import { Link } from 'react-router-dom';
 
 // style
 import styled from 'styled-components';
@@ -154,9 +155,15 @@ const Login = () => {
                     <Title>Sign In</Title>
                     <Input type="email" placeholder="Email or phone number" />
                     <Input type="password" placeholder="Password" />
-                    <Button className="loginButton">Sign In</Button>
+                    <Link to="/login" className='react-link'>
+                        <Button className="loginButton">Sign In</Button>
+                    </Link>
+
                     <Text>
-                    New to HALA? <GoSignUp>Sign up now.</GoSignUp>
+                    New to HALA? 
+                        <Link to="/register" className='react-link'>
+                            <GoSignUp>Sign up now.</GoSignUp>
+                        </Link>
                     </Text>
                     <SmallText>
                     This page is protected by Google reCAPTCHA to ensure you're not a

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState, useRef} from "react";
+import { Link } from 'react-router-dom';
 
 // style
 import styled from 'styled-components';
@@ -17,16 +18,16 @@ import {mobile, tablet} from '../util/responsive';
 const Container = styled.div`
     width: 100vw;
     height: 100vh;
-background: linear-gradient(
-    rgba(255, 255, 255, 0.5) 20%,
-    rgba(255, 255, 255, 0.4) 30%,
-    rgba(255, 255, 255, 0.3) 40%, 
-    rgba(255, 255, 255, 0.2) 90%,
-    rgba(255, 255, 255, 0.1) 98%
-  ),
-  url("https://i.pinimg.com/564x/d4/a2/fc/d4a2fcd2321a0d907a56f384a70ea21f.jpg")
-    center;
-background-size: cover;
+    background: linear-gradient(
+        rgba(255, 255, 255, 0.5) 20%,
+        rgba(255, 255, 255, 0.4) 30%,
+        rgba(255, 255, 255, 0.3) 40%, 
+        rgba(255, 255, 255, 0.2) 90%,
+        rgba(255, 255, 255, 0.1) 98%
+    ),
+    url("https://i.pinimg.com/564x/d4/a2/fc/d4a2fcd2321a0d907a56f384a70ea21f.jpg")
+        center;
+    background-size: cover;
 
 
 `;
@@ -36,12 +37,11 @@ const TopWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    
 `
 
 const Logo = styled.h1`
   font-weight: bold;
-
-  /* color: var(--vintage-red); */
 
   ${tablet({ fontSize: "24px" })}
 
@@ -54,6 +54,7 @@ const LoginBtn = styled.button`
     padding: 8px 15px;
     font-size: 1.2rem;
     font-weight: 500;
+    z-index:1 ; /* because RegisterWrapper is position: absolute; */
     cursor: pointer;
 
     transition: all 0.5s ease;
@@ -172,7 +173,9 @@ const Register = () => {
         <Container>
             <TopWrapper>
                 <Logo> HALA </Logo>
-                <LoginBtn>Sign In</LoginBtn>
+                <Link to="/login" className='react-link' style={{zIndex:"99"}}>    {/* zIndex:"99" >>> because RegisterWrapper is position: absolute;*/}  
+                    <LoginBtn>Sign In</LoginBtn>       
+                </Link>
             </TopWrapper>
 
             <RegisterWrapper>
