@@ -1,5 +1,9 @@
 import React, { useRef } from 'react'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+
+//api
+import axios from 'axios'
 
 // style
 import styled from 'styled-components';
@@ -199,7 +203,7 @@ const ArrowIcon = styled.div`
 `
 const InfoDesc = styled.p`
     line-height: 1.5;
-    margin: 15px 0;
+    margin: 15px 20px;
 
     &::first-letter{
         margin-left:2rem ;
@@ -221,6 +225,26 @@ const ProductDetails = () => {
     const thumbRef = useRef();
 
     const [toggle, setToggle ] =useState(false);
+
+
+    const location = useLocation();
+    const productId = location.pathname.split("/")[2];
+    const [product, setProduct] = useState({});
+
+    useEffect(() => {
+        const getProduct = async () => {
+          try {
+            const res = await axios.get("https://fakestoreapi.com/products/" + productId );
+            setProduct(res.data);
+
+          } catch {}
+        };
+        getProduct();
+        console.log(product);
+        // console.log(product.rating);
+        // console.log(product.rating.rate);
+    }, [productId ]);
+
 
     const handleClick = (index)=>{
         //alert(`you choose index ${index}`)
@@ -265,40 +289,40 @@ const ProductDetails = () => {
 
     <TopWrapper>
 
-    {
-      myProducts.map(item =>(
-        <Details key={item._id}>
+        <Details key={product._id}>
 
           <BigImgWrapper>
             {/* <BigImg src={item.src[index]} alt=""/> */}
-            <BigImg src={item.src[choosedindex]} alt=""/>
+            <BigImg src={product.image} alt=""/>
           </BigImgWrapper>
 
           <Box>
             <Row>
-              <RowH2Title>{item.title}</RowH2Title>
+              <RowH2Title>{product.title}</RowH2Title>
             </Row>
 
-            <Price>${item.price}</Price>
+            <Price>${product.price}</Price>
 
    
+            {product.rate && (
+                    
+            <RateWrapper>  
 
-            <RateWrapper>
-                <RateScore>{item.rating.rate}</RateScore>
+                <RateScore>{product.rating.rate}</RateScore>
                 <RateStars>
                     <RateStar>
                      { [...Array(5)].map((star, index) => {
 
-                       while(increment < item.rating.rate) {
+                       while(increment < product.rating.rate) {
 
-                          if ((item.rating.rate-increment)<1){
+                          if ((product.rating.rate-increment)<1){
                             increment++;
                             return (<StarHalf style={{color:"#e59819"}}></StarHalf>)
                           }
                           increment++;
                           return (<Star style={{color:"#e59819"}}></Star>)
                       }
-                      while(max > item.rating.rate) {        
+                      while(max >product.rating.rate) {        
                           max--;
                        
                           return (<Star style={{color:"gray"}}></Star>)
@@ -309,11 +333,14 @@ const ProductDetails = () => {
                     </RateStar>
                 </RateStars>
 
-                <RateReviewerNum>(222)</RateReviewerNum>
+                <RateReviewerNum>({product.rating.count})</RateReviewerNum>
             </RateWrapper>
+                    )}
 
-            <Desc>{item.description}</Desc>
-            <Desc>{item.content}</Desc>
+            <Desc>{product.description}</Desc>
+
+            <Desc>{myProducts.content}</Desc>   {/* use dummy data */}
+
 
             <AddContainer>
                 <AmountContainer>
@@ -328,8 +355,7 @@ const ProductDetails = () => {
 
         </Details>
 
-      ))
-    }
+    
     </TopWrapper>
 
     <ShowMoreWrapper>
