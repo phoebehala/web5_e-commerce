@@ -57,7 +57,7 @@ const BigImg = styled.img`
     height: 100%;
     max-height: 400px;
     display: block;
-    object-fit: cover;
+    object-fit: contain;
 `
 const Box = styled.div`
     max-width: 500px;
