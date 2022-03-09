@@ -17,87 +17,81 @@ const Container = styled.div`
 
     /* background-color: #f5fbfd; */
 `
-// const Products = (props) => { }  >>> props are {cat: 'man', filters: {…}, sort: {…}}
-const Products = ( { sort } ) => {
-   console.log("destructured props -sort", sort);
+// const Products = (props) => { }  >>> props are {cat: 'man', sort: {…}}
+const Products = ( { cat, sort } ) => {
+   console.log("destructured props -cat", cat,"destructured props -sort", sort);
    const [products , setProducts] = useState([])
    const [filteredProducts , setFilteredProducts] = useState([])
    console.log('filteredProducts',filteredProducts);
 
    useEffect( ()=>{
         // make a request to API
-        const getProducts = async ()=>{
+        const getProducts = async ()=>{                                                    
             try {
-                const res = await axios.get("https://fakestoreapi.com/products/")
+                const res = await axios.get(cat? `https://fakestoreapi.com/products/category/${cat}`
+                                                : "https://fakestoreapi.com/products/")
                 console.log(res);
-                setProducts(res.data)
-            } catch (error) {
-                
+                setProducts(res.data);
+               
+            } catch (error) {              
             }
         }
         getProducts()
-   })
+   },[cat]) // whenever cat get changed, fire the function)
 
 
-/*
    useEffect( ()=>{
-       // make a request to API
-        const getProducts = async ()=>{
-            try {
-                const res = await axios.get(cat
-                                            ?`http://localhost:5000/api/products/?category=${cat}`
-                                            :`http://localhost:5000/api/products/`)
-                console.log('res',res);
-                setProducts(res.data)
-            } catch (error) {
-                
-            }
-        }
-        getProducts()
 
-   },[cat]) // whenever cat get changed, fire the function
-   */
+     // by default, showing in the  descending order of popularity
+      setFilteredProducts(products.sort((a, b) => b.rating.count - a.rating.count)); //1 >>> desc
+      //console.log('filteredProducts',filteredProducts);
+    },[products]) // whenever products get changed, fire the function)
 
-   /*
-   useEffect(() => {
-       console.log('products',products,'filters',filters,'cat',cat);
-       
-    cat &&
-        setFilteredProducts(
-        products.filter((item) =>
-          Object.entries(filters).every(([key, value]) =>  // Object.entries(filters) >>> such as [["color","yellow"],["size","XS"]]
-            item[key].includes(value)
-          )
-        )
-      );
-      console.log('filteredProducts',filteredProducts)
-  }, [products, cat, filters]);
-*/
+
 
   useEffect(() => {
-    if (sort === "popularity") {
-      setFilteredProducts((prev) =>
-        console.log(prev)
-      );
-    }
-     else if (sort === "asc") {
-      setFilteredProducts((prev) =>
-        [...prev].sort((a, b) => a.price - b.price)
-      );
-    } else {
-      setFilteredProducts((prev) =>
-        [...prev].sort((a, b) => b.price - a.price)
-      );
-    }
-  }, [sort]);
 
+        if (sort === "popularity") {
+          setFilteredProducts((prev) =>
+            [...prev].sort((a, b) => b.rating.count - a.rating.count) //1 >>> desc
+          );
+        }else if (sort === "rating") {
+            setFilteredProducts((prev) =>
+              [...prev].sort((a, b) => b.rating.rate - a.rating.rate)  //1 >>> desc
+            );
+
+        }else if (sort === "asc") {
+          setFilteredProducts((prev) =>
+            [...prev].sort((a, b) => a.price - b.price) //-1 >>> asc
+          );
+
+        } else {
+          setFilteredProducts((prev) =>
+            [...prev].sort((a, b) => b.price - a.price) //1 >>> desc
+          );
+
+        }
+
+    // return ()=>{
+    //   console.log('clean up');
+
+    // }
+    
+  }, [sort]); // whenever sort get changed, fire the function)
 
   return (
     <Container>
         
-        {filteredProducts.map((item) => <ProductCard item={item} key={item.id} />)}
-        {products.slice(0, 8).map((item) => <ProductCard item={item} key={item.id} />)}
+         {filteredProducts.map((item) => <ProductCard item={item} key={item.id} />)}
+   
 
+        {/* {cat
+
+        ? filteredProducts.map((item) => <ProductCard item={item} key={item.id} />)
+        : products
+          .slice(0, 8) // only 8 items
+          .map((item) => <ProductCard item={item} key={item.id} />
+        )} */}
 
     </Container>
       /*

@@ -16,8 +16,11 @@ import Products from '../components/Products';
 const Container = styled.div`
 
 `;
-const Title = styled.div`
+const Title = styled.h1`
     margin: 20px;   
+    &::first-letter{
+      text-transform: capitalize;
+    }
 `;
 const FilterContainer = styled.div`
     display: flex;
@@ -45,28 +48,36 @@ const Select = styled.select`
 `;
 const Option = styled.option``;
 
+
+
 const ProductList = () => {
 
   const [sort, setSort] = useState("rating");
+
+  const location = useLocation();
+  //console.log('location',location);
+  const cat = location.pathname.split("/")[2];
+  console.log('cat',cat); // women's%20clothing
 
   return (
     <Container>
       <Navbar />
       <Announcement />
-      <Title>Tittle</Title>
+                   {/* cat.replace("%20"," ") >>> replace %20 with space */}
+      <Title>{ cat ? cat.replace("%20"," ") :"All Products"}</Title>
       <FilterContainer>
         <Filter>
           <FilterText>Sort Products:</FilterText>
           <Select onChange={(e) => setSort(e.target.value)}>
-            <Option value="rating">Rating</Option>
             <Option value="popularity">Popularity</Option>
+            <Option value="rating">Rating</Option>
             <Option value="asc">Price: Low to High </Option>
             <Option value="desc">Price: High to Low </Option>
           </Select>
         </Filter>
       </FilterContainer>
-      {/* <Products cat={cat}  sort={sort} /> */}
-      <Products  sort={sort} /> 
+
+      <Products  cat={cat} sort={sort} /> 
 
       <Footer />
     </Container>
