@@ -1,11 +1,15 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom';
 
 // style
 import styled from 'styled-components';
 import {mobile, tablet} from '../util/responsive';
 // icons
 import { FavoriteBorderOutlined, SearchOutlined, ShoppingCartOutlined, Star, StarHalf } from '@material-ui/icons';
+
+// redux
+import { useDispatch } from 'react-redux';
+import { addProduct } from '../redux/cartSlice';
 
 // opacity: 0; >>> cannot see <Info> if a user doesn't hover it
 const Info = styled.div`
@@ -173,6 +177,20 @@ const Mark = styled.div`
 const ProductCard = ({item}) => {
     let increment =0;
     let max =5;
+
+    // redux  // let it know addProduct() is redux reducer function
+    const dispatch = useDispatch()
+
+    const handleAddToCart =()=>{
+      dispatch(// dispatch action
+              //addProduct({product:product, quantity:quantity, subTotal:product.price*quantity})
+  
+          addProduct({
+              ...item,  // copy all product info such as quantity, color, size, price....
+              quantity:1,    // override by the quantity by 1
+          })
+      )
+    }
   
   return (
     <Container>
@@ -220,12 +238,13 @@ const ProductCard = ({item}) => {
 
         
         <Info >
-         <Icon>
-                <ShoppingCartOutlined />
+            <Icon>
+                <ShoppingCartOutlined onClick={()=>handleAddToCart()} />
             </Icon>
             <Icon>
-
+              <Link to={`/product/${item.id}`} className="react-link">
                 <SearchOutlined />
+              </Link>
             </Icon>
             <Icon>
                 <FavoriteBorderOutlined />
