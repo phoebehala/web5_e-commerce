@@ -208,6 +208,7 @@ const Button = styled.button`
 const Cart = () => {
 
     const cart =useSelector(state=>state.cart)
+    const wishlist =useSelector(state=>state.wishlist)
 
   return (
         <Container>
@@ -219,7 +220,7 @@ const Cart = () => {
                         <TopButton>CONTINUE SHOPPING</TopButton>
                         <TopTexts>
                             <TopText>Shopping Bag({cart.quantity?cart.quantity:"0"})</TopText>
-                            <TopText>Your Wishlist (0)</TopText>
+                            <TopText>Your Wishlist ({wishlist.quantity?wishlist.quantity:"0"})</TopText>
                         </TopTexts>
                         <TopButton type="filled">CHECKOUT NOW</TopButton>
                     </Top>
@@ -261,7 +262,7 @@ const Cart = () => {
 
                             <SummaryItem>
                                 <SummaryItemText>Subtotal</SummaryItemText>
-                                <SummaryItemPrice>$ cart.total</SummaryItemPrice>
+                                <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
                             </SummaryItem>
                             <SummaryItem>
                                 <SummaryItemText>Estimated Shipping</SummaryItemText>
@@ -273,7 +274,7 @@ const Cart = () => {
                             </SummaryItem>
                             <SummaryItem type="total">
                                 <SummaryItemText>Total</SummaryItemText>
-                                <SummaryItemPrice>$ cart.total</SummaryItemPrice>
+                                <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
                             </SummaryItem>
 
                 

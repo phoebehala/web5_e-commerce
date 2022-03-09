@@ -11,8 +11,9 @@ import {mobile, tablet} from '../util/responsive';
 
 //icons
 import {  Star, StarHalf } from '@material-ui/icons';
-import { KeyboardArrowDown, KeyboardArrowUp } from '@material-ui/icons';
+import { KeyboardArrowDown, KeyboardArrowUp, FavoriteBorderOutlined } from '@material-ui/icons';
 import { Add, Remove } from "@material-ui/icons";
+
 
 // components
 import Navbar from '../components/Navbar.jsx';
@@ -26,6 +27,7 @@ import {myProducts} from '../data/data'
 // redux
 import { useDispatch } from 'react-redux';
 import { addProduct } from '../redux/cartSlice';
+import {addToWishlist} from '../redux/wishlistSlice';
 
 
 
@@ -152,7 +154,7 @@ const AddContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 50%;
+    width: 60%;
     margin-top: 10px;
     ${mobile({ width: "100%" })}
 
@@ -162,6 +164,7 @@ const AmountContainer = styled.div`
     display: flex;
     align-items: center;
     font-weight: 700;
+    margin-right:10px ;
 `;
 const Amount = styled.span`
     width: 30px;
@@ -182,7 +185,23 @@ const AddToCartBtn = styled.button`
     cursor: pointer;
     padding: 10px 25px;
 `
+const Icon = styled.div`
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: white;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 10px;
+
+    transition: all 0.5s ease;
+    &:hover {
+        transform: scale(1.1);
+      }
+`;
 
 
 // bottom
@@ -304,10 +323,22 @@ const ProductDetails = () => {
     
             addProduct({
                 ...product,  // copy all product info such as quantity, color, size, price....
-                quantity,    // override by the total quantity the user has added     const [quantity, setQuantity] = useState(1);
+                quantity:quantity,    // override by the total quantity the user has added     const [quantity, setQuantity] = useState(1);
             })
         )
     }
+
+    const handleAddToWishlist =()=>{
+        dispatch(// dispatch action
+          addToWishlist({
+              ...product,  // copy all product info such as quantity, color, size, price....
+              quantity:1,    // override by the quantity by 1
+          })
+        )
+      }
+
+
+
 
   return (
     <>
@@ -367,7 +398,7 @@ const ProductDetails = () => {
 
             <Desc>{product.description}</Desc>
 
-            <Desc>{myProducts.content}</Desc>   {/* use dummy data */}
+            <Desc>{myProducts.content}</Desc>   {/* currently use dummy data since no info from API*/}
 
 
             <AddContainer>
@@ -377,6 +408,10 @@ const ProductDetails = () => {
                     <Add onClick={()=>handleQuantity("inc")}/>
                 </AmountContainer>
                 <AddToCartBtn onClick={()=>handleAddToCart()}>ADD TO CART</AddToCartBtn>
+                <Icon>
+                    <FavoriteBorderOutlined onClick={()=>handleAddToWishlist()}
+                                            style={{width:"35px", height:"100%"}}/>
+                </Icon>
             </AddContainer>
        
           </Box>

@@ -20,10 +20,7 @@ const Wrapper = styled.div`
 
     display: flex;
     align-items: center;
-    justify-content: space-between;
-
-
-    
+    justify-content: space-between; 
 `
 // left
 const Left = styled.div`
@@ -31,14 +28,12 @@ const Left = styled.div`
 
     display: flex;
     align-items: center;
-    
 `;
 
 const Logo = styled.h1`
   font-weight: bold;
 
   ${tablet({ fontSize: "24px" })}
-
 `;
 
 // right
@@ -48,8 +43,6 @@ const Right = styled.div`
     display:flex;
     align-items: center;
     justify-content: flex-end;
-
-
 `;
 const MenuItem = styled.div`
   font-size: 14px;
@@ -63,15 +56,16 @@ const MenuItem = styled.div`
   }
 
   ${tablet({ fontSize: "12px", marginLeft: "10px" })}
- 
 `;
 
 
 const Navbar = () => {
     const cart =useSelector(state=>state.cart)
     //console.log('what is cart state?', cart);
-    const quantity =useSelector(state=>state.cart.quantity)
+    const cartQuantity =useSelector(state=>state.cart.quantity)
     //console.log('what is quantity in the cart state?',quantity);
+
+    const wishlistQuantity = useSelector(state=>state.wishlist.quantity);
 
   return (
     <Container >
@@ -92,7 +86,7 @@ const Navbar = () => {
 
                 <Link to="/cart" className='react-link'> 
                     <MenuItem>
-                        <Badge badgeContent={quantity} color="primary">
+                        <Badge badgeContent={cartQuantity} color="primary">
                             <ShoppingCartOutlined />
                         </Badge>
                     </MenuItem>       
@@ -100,7 +94,7 @@ const Navbar = () => {
               
 
                 <MenuItem>
-                    < Badge badgeContent={1} color="primary">
+                    < Badge badgeContent={wishlistQuantity} color="primary">
                         <FavoriteBorder />
                     </Badge>
                 </MenuItem>

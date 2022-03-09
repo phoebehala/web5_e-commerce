@@ -10,6 +10,7 @@ import { FavoriteBorderOutlined, SearchOutlined, ShoppingCartOutlined, Star, Sta
 // redux
 import { useDispatch } from 'react-redux';
 import { addProduct } from '../redux/cartSlice';
+import {addToWishlist} from '../redux/wishlistSlice';
 
 // opacity: 0; >>> cannot see <Info> if a user doesn't hover it
 const Info = styled.div`
@@ -191,11 +192,17 @@ const ProductCard = ({item}) => {
           })
       )
     }
+    const handleAddToWishlist =()=>{
+      dispatch(// dispatch action
+        addToWishlist({
+            ...item,  // copy all this item(product) info such as quantity, color, size, price....
+            quantity:1,    // override by the quantity by 1
+        })
+      )
+    }
   
   return (
     <Container>
-           
-
             <ImgWrapper>
                 <ProductImg src={item.image} alt={item.title} />
             </ImgWrapper>
@@ -233,10 +240,7 @@ const ProductCard = ({item}) => {
 
                 <Price>CA${item.price}</Price>
                 {item.mark &&<Mark>{item.mark}</Mark> }
-            </TextWrapper>
-
-
-        
+            </TextWrapper>     
         <Info >
             <Icon>
                 <ShoppingCartOutlined onClick={()=>handleAddToCart()} />
@@ -247,7 +251,7 @@ const ProductCard = ({item}) => {
               </Link>
             </Icon>
             <Icon>
-                <FavoriteBorderOutlined />
+                <FavoriteBorderOutlined onClick={()=>handleAddToWishlist()}/>
             </Icon>
         </Info>
     
