@@ -4,14 +4,15 @@ import React from 'react'
 import styled from 'styled-components';
 import {mobile, tablet} from '../util/responsive';
 import { Link } from 'react-router-dom';
-
 //icons
 import {FavoriteBorder, Search, ShoppingCartOutlined} from  '@material-ui/icons'
 import { Badge } from '@material-ui/core';
 
+// redux
+import { useSelector } from 'react-redux';
+
 const Container = styled.div`
     height: 100%;
-
   
 `
 const Wrapper = styled.div`
@@ -67,6 +68,11 @@ const MenuItem = styled.div`
 
 
 const Navbar = () => {
+    const cart =useSelector(state=>state.cart)
+    //console.log('what is cart state?', cart);
+    const quantity =useSelector(state=>state.cart.quantity)
+    //console.log('what is quantity in the cart state?',quantity);
+
   return (
     <Container >
         <Wrapper>
@@ -84,11 +90,14 @@ const Navbar = () => {
                     <MenuItem>SIGN IN</MenuItem>
                 </Link>
 
-                <MenuItem>
-                    <Badge badgeContent={1} color="primary">
-                        <ShoppingCartOutlined />
-                    </Badge>
-                </MenuItem>
+                <Link to="/cart" className='react-link'> 
+                    <MenuItem>
+                        <Badge badgeContent={quantity} color="primary">
+                            <ShoppingCartOutlined />
+                        </Badge>
+                    </MenuItem>       
+                </Link>
+              
 
                 <MenuItem>
                     < Badge badgeContent={1} color="primary">

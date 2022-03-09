@@ -16,7 +16,7 @@ import Announcement from '../components/Announcement';
 import Footer from '../components/Footer';
 
 // redux
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 // stripe
 // import StripeCheckout from "react-stripe-checkout";
@@ -207,6 +207,7 @@ const Button = styled.button`
 
 const Cart = () => {
 
+    const cart =useSelector(state=>state.cart)
 
   return (
         <Container>
@@ -217,7 +218,7 @@ const Cart = () => {
                     <Top>
                         <TopButton>CONTINUE SHOPPING</TopButton>
                         <TopTexts>
-                            <TopText>Shopping Bag(2)</TopText>
+                            <TopText>Shopping Bag({cart.quantity?cart.quantity:"0"})</TopText>
                             <TopText>Your Wishlist (0)</TopText>
                         </TopTexts>
                         <TopButton type="filled">CHECKOUT NOW</TopButton>
@@ -226,35 +227,32 @@ const Cart = () => {
                     <Bottom>
 
                         <Info>
-      
+                        {cart.products.map(product=>(
                             <Product>
                                 <ProductDetail>
-                                    <Image src="https://i.pinimg.com/474x/02/72/bb/0272bbd458acaac3c6761222effc6463.jpg" />
+                                    <Image src={product.image} />
                                     <Details>
                                         <ProductName>
-                                            <b>Product:</b> product.title
+                                            <b>Product:</b> {product.title}
                                         </ProductName>
                                         <ProductId>
-                                            <b>ID:</b> product._id
+                                            <b>ID:</b> {product.id}
                                         </ProductId>
-                                        <ProductColor color="red" />
-                                        <ProductSize>
-                                            <b>Size:</b> product.size
-                                        </ProductSize>
+                                  
                                     </Details>
                                 </ProductDetail>
                                 <PriceDetail>
                                     <ProductAmountContainer>
                                     <Add />
-                                    <ProductAmount>product.quantity</ProductAmount>
+                                    <ProductAmount>{product.quantity}</ProductAmount>
                                     <Remove />
                                     </ProductAmountContainer>
-                                    <ProductPrice>$ product.price*product.quantity</ProductPrice>
+                                    <ProductPrice>$ {product.price*product.quantity}</ProductPrice>
                                 </PriceDetail>
                             </Product>
 
+                        ))}
                             <Hr />
-                           
                                      
                         </Info>
 

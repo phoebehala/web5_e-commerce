@@ -23,6 +23,10 @@ import Products from '../components/Products';
 // data
 import {myProducts} from '../data/data'
 
+// redux
+import { useDispatch } from 'react-redux';
+import { addProduct } from '../redux/cartSlice';
+
 
 
 const TopWrapper = styled.div`
@@ -218,7 +222,6 @@ const ProductDetails = () => {
     let increment =0;
     let max =5;
 
-
     const [choosedindex, setChoosedIndex] = useState(0);
 
     // to access DOM
@@ -230,6 +233,12 @@ const ProductDetails = () => {
     const location = useLocation();
     const productId = location.pathname.split("/")[2];
     const [product, setProduct] = useState({});
+
+    const [quantity, setQuantity] = useState(1);
+
+    // redux  // let it know addProduct() is redux reducer function
+    const dispatch = useDispatch()
+
 
     useEffect(() => {
         const getProduct = async () => {
@@ -246,6 +255,7 @@ const ProductDetails = () => {
     }, [productId ]);
 
 
+    // choose photo/thumb
     const handleClick = (index)=>{
         //alert(`you choose index ${index}`)
         console.log(`you choose index ${index}`);
@@ -279,6 +289,24 @@ const ProductDetails = () => {
     const handleShowMore =()=>{
         setToggle(!toggle)
         console.log(toggle);
+    }
+
+    const handleQuantity = (type)=>{
+        if (type==="dec"){
+            quantity>1 && setQuantity(quantity-1)
+        }else{
+            setQuantity(quantity+1)
+        }
+    }
+    const handleAddToCart =()=>{
+        dispatch(// dispatch action
+                //addProduct({product:product, quantity:quantity, subTotal:product.price*quantity})
+    
+            addProduct({
+                ...product,  // copy all product info such as quantity, color, size, price....
+                quantity,    // override by the total quantity the user has added     const [quantity, setQuantity] = useState(1);
+            })
+        )
     }
 
   return (
@@ -344,11 +372,11 @@ const ProductDetails = () => {
 
             <AddContainer>
                 <AmountContainer>
-                    <Remove />
-                    <Amount>1</Amount>
-                    <Add />
+                    <Remove onClick={()=>handleQuantity("dec")}/>
+                    <Amount>{quantity}</Amount>
+                    <Add onClick={()=>handleQuantity("inc")}/>
                 </AmountContainer>
-                <AddToCartBtn >ADD TO CART</AddToCartBtn>
+                <AddToCartBtn onClick={()=>handleAddToCart()}>ADD TO CART</AddToCartBtn>
             </AddContainer>
        
           </Box>
