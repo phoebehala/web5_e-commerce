@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 // style
 import styled from 'styled-components';
@@ -50,7 +51,9 @@ const header = () => {
         <Bg src="https://i.pinimg.com/564x/6f/64/b5/6f64b519fade0a893e906c6155bbce34.jpg" alt="" />
      
         <HeaderInfo>
-             <HeaderBtn>SHOP NOW </HeaderBtn>
+            <Link to="./products" className='react-link'>
+                <HeaderBtn>SHOP NOW </HeaderBtn>
+            </Link>
         </HeaderInfo>
 
 
