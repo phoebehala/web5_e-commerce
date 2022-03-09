@@ -8,12 +8,25 @@ const wishlistSlice = createSlice({
     },
     reducers:{
         addToWishlist:(state, action)=>{
-            state.quantity += 1;  // wishlist quantity which is how many different products the user put inside the cart
-            state.products.push(action.payload);
-            //state.total += action.payload.subTotal;
+        
+            const existingWishlistItem =  state.products.find( item => item.id === action.payload.id)
+    
+            // if the item has already in the cart, do nothing
+            if (existingWishlistItem ){
+                return
+            }else{
+                state.quantity += 1;  // wishlist quantity 
+                state.products.push(action.payload);
+            }
+        },
+        removFromWishlist:(state, action)=>{
+            //console.log('action.payload.id',action.payload.id);
+            //console.log('state.products',state.products);
+            state.quantity -= 1;  // wishlist quantity 
+            state.products= state.products.filter(item => item.id !== action.payload.id) 
         }
     }
 })
 
-export const {addToWishlist} =wishlistSlice.actions;
+export const {addToWishlist, removFromWishlist} =wishlistSlice.actions;
 export default wishlistSlice.reducer;

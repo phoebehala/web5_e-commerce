@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState } from 'react'
 
 // style
 import styled from 'styled-components';
@@ -8,8 +9,16 @@ import { Link } from 'react-router-dom';
 import {FavoriteBorder, Search, ShoppingCartOutlined} from  '@material-ui/icons'
 import { Badge } from '@material-ui/core';
 
+//material-ui
+import { Drawer } from '@material-ui/core';
+
 // redux
 import { useSelector } from 'react-redux';
+
+// component
+import Wishlist from './Wishlist';
+
+
 
 const Container = styled.div`
     height: 100%;
@@ -66,6 +75,9 @@ const Navbar = () => {
     //console.log('what is quantity in the cart state?',quantity);
 
     const wishlistQuantity = useSelector(state=>state.wishlist.quantity);
+    const wishlistProducts =useSelector(state=>state.wishlist.products);
+
+    const [wishlistOpen, setWishlistOpen ] = useState(false);
 
   return (
     <Container >
@@ -92,8 +104,11 @@ const Navbar = () => {
                     </MenuItem>       
                 </Link>
               
-
-                <MenuItem>
+              {/* for wishlist */}
+                <Drawer anchor='left' open={wishlistOpen} onClose={()=>setWishlistOpen(false)}>
+                    <Wishlist wishlistProducts={wishlistProducts} wishlistQuantity={wishlistQuantity} />
+                </Drawer>
+                <MenuItem onClick={() =>setWishlistOpen(true)}>
                     < Badge badgeContent={wishlistQuantity} color="primary">
                         <FavoriteBorder />
                     </Badge>
