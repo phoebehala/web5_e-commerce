@@ -66,7 +66,6 @@ const TopTexts = styled.div`
 `;
 const TopText = styled.span`
     text-decoration: underline;
-    cursor: pointer;
     margin: 0px 10px;
 
     ${tablet({ display: "none" })}
@@ -157,6 +156,7 @@ const Cart = () => {
                     </Top>
 
                     <Bottom>
+                        {cart.products.length === 0 ? <p>No items in cart.</p> : null}
 
                         <Info>
                         {cart.products.map(product=>(
