@@ -18,8 +18,13 @@ import {
 
 } from "react-router-dom";
 
+// redux
+import { useSelector } from 'react-redux';
+
 function App() {
-  const user = false
+
+  const user = useSelector(state=>state.user.currentUser)
+  
   return (
 
     <Router>

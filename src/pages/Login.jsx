@@ -9,10 +9,13 @@ import {mobile, tablet} from '../util/responsive';
 
 // components
 
+// API
+import axios from "axios"
 
 // redux
 // import { login } from "../redux/apiCall";
-// import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {loginStart, loginSuccess, loginFailure } from '../redux/userSlice'
 
 
 const Container = styled.div`
@@ -87,7 +90,7 @@ const Input = styled.input`
     border-radius: 5px;
     border: white;
     background-color: rgba(255, 255, 255, 0.6);
-    color: white;
+    color: var(--main-color);
     padding-left: 10px;
 `;
 const Button = styled.button`
@@ -98,6 +101,7 @@ const Button = styled.button`
     border: none;
     font-size: 1.2rem;
     font-weight: 500;
+    padding:0 15px ;
     cursor: pointer;
 
     transition: all 0.5s ease;
@@ -105,6 +109,11 @@ const Button = styled.button`
         background-color:var(--vintage-red);
     }
 `;
+const Error = styled.span`
+  color: var(--marron-red);
+  margin-bottom:10px ;
+`;
+
 const Text = styled.span`
     color: var(--dark-gray);
     font-size: 1rem;
@@ -137,26 +146,45 @@ const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    // const dispatch = useDispatch();
-    // const {isFetching, error} = useSelector((state)=>state.user)
+    const dispatch = useDispatch();
+    const {isFetching, error} = useSelector((state)=>state.user)
 
-    // const handleClick =(e)=>{
-    //     e.preventDefault();
-    //     login(dispatch, { username, password });
-    // }
+    const handleClick = async(e)=>{
+        e.preventDefault();
+        dispatch(loginStart());
+        try {
+            // to perform POST requests with Axios
+            const res = await axios.post("https://fakestoreapi.com/auth/login", {
+                username: username, 
+                password: password
+            })
+            console.log('res',res);
+            dispatch(loginSuccess(res.data)) 
+        } catch (error) {
+            dispatch(loginFailure())  
+        }
+    }
   return (
         <Container>
             <Brand>
                 <Logo> HALA </Logo>
             </Brand>
-
             <LoginWrapper>
                 <LoginForm>
                     <Title>Sign In</Title>
-                    <Input type="email" placeholder="Email or phone number" />
-                    <Input type="password" placeholder="Password" />
+                    <Input  placeholder="Username"
+                            onChange={(e)=>setUsername(e.target.value)} />
+
+                    <Input placeholder="password" 
+                           type="password" // hide password while typing
+                           onChange={(e)=>setPassword(e.target.value)}
+                           disabled={isFetching} />
+                    {error && <Error>Something went wrong...</Error>}
+
                     <Link to="/login" className='react-link'>
-                        <Button className="loginButton">Sign In</Button>
+                        <Button className="loginButton"
+                                onClick={handleClick}
+                        >Sign In</Button>
                     </Link>
 
                     <Text>
