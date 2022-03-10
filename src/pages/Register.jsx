@@ -167,6 +167,7 @@ const Register = () => {
 
     const handleRegister =()=>{
         setPassword(passwordRef.current.value)
+        // api call here
     }
 
   return (
