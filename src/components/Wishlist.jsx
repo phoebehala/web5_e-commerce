@@ -24,7 +24,7 @@ const Wishlist = ({wishlistProducts, wishlistQuantity}) => {
     <Container>
     <h2>Your whishlist ({wishlistQuantity})</h2>
 
-    {wishlistProducts.length === 0 ? <p>No items in cart.</p> : null}
+    {wishlistProducts.length === 0 ? <p>No items in wishlist.</p> : null}
 
     {wishlistProducts.map(item => (
         <WishlistItem item={item} key={item.id} />
