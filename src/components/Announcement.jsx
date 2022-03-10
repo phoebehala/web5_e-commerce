@@ -16,13 +16,21 @@ const Container = styled.div`
   
   font-size: 14px;
   font-weight: 500;
+
+  b{
+    text-decoration: underline;
+    margin-left:10px;
+    font-size:1rem ;
+  }
 `;
 
 const Announcement = () => {
   return (
         <Container>
             Super Deal! Free Delivery on Orders Over $100 
-              <b  style={{marginLeft:"10px"}}>shop now</b>
+            <Link to={'/products'} className="react-link">
+              <b>shop now</b>
+            </Link>
         </Container>
     );
 };
