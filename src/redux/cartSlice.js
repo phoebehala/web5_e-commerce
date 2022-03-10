@@ -29,12 +29,6 @@ const cartSlice = createSlice({
               }
               state.total += action.payload.price * action.payload.quantity 
 
-            /*
-            state.quantity += 1;  // cart quantity which is how many different products the user put inside the cart
-            state.products.push(action.payload);
-            //state.total += action.payload.subTotal;
-            state.total += action.payload.price * action.payload.quantity  // action.payload.quantity >>> product quantity
-            */
         },
 
         // to add exisiting cart product by one
