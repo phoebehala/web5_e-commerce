@@ -13,7 +13,8 @@ import { Badge } from '@material-ui/core';
 import { Drawer } from '@material-ui/core';
 
 // redux
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import  { logout} from '../redux/userSlice'
 
 // component
 import Wishlist from './Wishlist';
@@ -79,6 +80,15 @@ const Navbar = () => {
 
     const [wishlistOpen, setWishlistOpen ] = useState(false);
 
+    const user = useSelector(state=>state.user.currentUser)
+
+    const dispatch =useDispatch();
+    const handleLogout = ()=>{
+        dispatch(
+            logout()
+        )
+    }
+
   return (
     <Container >
         <Wrapper>
@@ -88,32 +98,43 @@ const Navbar = () => {
                 </Link>
             </Left> 
 
-            <Right>
-                <Link to="/register" className='react-link'>
-                    <MenuItem>REGISTER</MenuItem>
-                </Link>
-                <Link to="/login" className='react-link'>
-                    <MenuItem>SIGN IN</MenuItem>
-                </Link>
+            { user 
+             ?  <Right>
+                    <Link to="/cart" className='react-link'> 
+                        <MenuItem>
+                            <Badge badgeContent={cartQuantity} color="primary">
+                                <ShoppingCartOutlined />
+                            </Badge>
+                        </MenuItem>       
+                    </Link>
 
-                <Link to="/cart" className='react-link'> 
-                    <MenuItem>
-                        <Badge badgeContent={cartQuantity} color="primary">
-                            <ShoppingCartOutlined />
+                    {/*  for wishlist  */}
+                    <Drawer anchor='left' open={wishlistOpen} onClose={()=>setWishlistOpen(false)}>
+                        <Wishlist wishlistProducts={wishlistProducts} wishlistQuantity={wishlistQuantity} />
+                    </Drawer>
+                    <MenuItem onClick={() =>setWishlistOpen(true)}>
+                        < Badge badgeContent={wishlistQuantity} color="primary">
+                            <FavoriteBorder />
                         </Badge>
-                    </MenuItem>       
-                </Link>
-              
-              {/* for wishlist */}
-                <Drawer anchor='left' open={wishlistOpen} onClose={()=>setWishlistOpen(false)}>
-                    <Wishlist wishlistProducts={wishlistProducts} wishlistQuantity={wishlistQuantity} />
-                </Drawer>
-                <MenuItem onClick={() =>setWishlistOpen(true)}>
-                    < Badge badgeContent={wishlistQuantity} color="primary">
-                        <FavoriteBorder />
-                    </Badge>
-                </MenuItem>
-            </Right>
+                    </MenuItem>
+
+                    <MenuItem onClick={handleLogout}>LOGOUT</MenuItem>
+
+                </Right>
+            
+            : 
+                <Right>
+               
+                    <Link to="/register" className='react-link'>
+                        <MenuItem>REGISTER</MenuItem>
+                    </Link>
+                    <Link to="/login" className='react-link'>
+                        <MenuItem>SIGN IN</MenuItem>
+                    </Link>
+                </Right>
+                }
+
+           
 
         </Wrapper>
     </Container>
