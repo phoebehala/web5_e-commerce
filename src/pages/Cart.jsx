@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect, useState } from "react";
 
 // instead of import { useHistory } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 // style
 import styled from 'styled-components';
@@ -14,9 +14,10 @@ import { Add, Remove } from "@material-ui/icons";
 import Navbar from '../components/Navbar';
 import Announcement from '../components/Announcement';
 import Footer from '../components/Footer';
+import CartItem from '../components/CartItem';
 
 // redux
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 // stripe
 // import StripeCheckout from "react-stripe-checkout";
@@ -31,7 +32,7 @@ const Container = styled.div``
 const Wrapper = styled.div`
     padding: 20px;
 
-    ${mobile({ padding: "10px" })}
+    ${tablet({ padding: "10px" })}
   
 `;
 
@@ -68,7 +69,7 @@ const TopText = styled.span`
     cursor: pointer;
     margin: 0px 10px;
 
-    ${mobile({ display: "none" })}
+    ${tablet({ display: "none" })}
 `;
 
 // bottom
@@ -76,7 +77,7 @@ const Bottom = styled.div`
   display: flex;
   justify-content: space-between;
 
-    ${mobile({ flexDirection: "column" })}
+    ${tablet({ flexDirection: "column" })}
 
 `;
 
@@ -86,81 +87,6 @@ const Info = styled.div`
     flex:3;
 `;
 
-const Product = styled.div`
-    display: flex;
-    justify-content: space-between;
-
-    ${mobile({ flexDirection: "column" })}
-`;
-
-// bottom left  > left
-const ProductDetail = styled.div`
-    flex:2;
-
-    display: flex;
-`;
-// bottom left  > left > left
-const Image = styled.img`
-    width: 200px;
-`;
-// bottom left  > left > right
-const Details = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-`;
-
-const ProductName = styled.span``;
-
-const ProductId = styled.span``;
-
-const ProductColor = styled.div`
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-
-    background-color:${props => props.color};
-`;
-
-const ProductSize = styled.span``;
-
-// bottom left  > right
-const PriceDetail = styled.div`
-    flex:1;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-
-`;
-const ProductAmountContainer = styled.div`
-    display: flex;
-    align-items: center;
-
-    margin-bottom: 20px;
-`;
-
-const ProductAmount = styled.div`
-    font-size: 24px;
-    margin: 5px;
-
-    ${mobile({ margin: "5px 15px" })}
-
-`;
-
-const ProductPrice = styled.div`
-    font-size: 30px;
-    font-weight: 200;
-    
-    ${mobile({ marginBottom: "20px" })}
-`;
-
-const Hr = styled.hr`
-   background-color: #eee;
-   border: none;
-   height:1px;
-`;
 
 // bottom right
 const Summary = styled.div`
@@ -172,7 +98,7 @@ const Summary = styled.div`
 
     /*height: 50vh;  limit the height of the Summary*/
 
-    ${mobile({ height: "50vh" })}
+    ${tablet({ height: "50vh" })}
     
    
 `;
@@ -207,8 +133,11 @@ const Button = styled.button`
 
 const Cart = () => {
 
-    const cart =useSelector(state=>state.cart)
-    const wishlist =useSelector(state=>state.wishlist)
+    const cart =useSelector(state=>state.cart);
+    const wishlist =useSelector(state=>state.wishlist);
+
+
+
 
   return (
         <Container>
@@ -217,7 +146,9 @@ const Cart = () => {
                 <Wrapper>
                     <Title>YOUR BAG</Title>
                     <Top>
-                        <TopButton>CONTINUE SHOPPING</TopButton>
+                        <Link to={"/products"} className='react-link'>
+                            <TopButton>CONTINUE SHOPPING</TopButton>
+                        </Link>
                         <TopTexts>
                             <TopText>Shopping Bag({cart.quantity?cart.quantity:"0"})</TopText>
                             <TopText>Your Wishlist ({wishlist.quantity?wishlist.quantity:"0"})</TopText>
@@ -229,31 +160,9 @@ const Cart = () => {
 
                         <Info>
                         {cart.products.map(product=>(
-                            <Product>
-                                <ProductDetail>
-                                    <Image src={product.image} />
-                                    <Details>
-                                        <ProductName>
-                                            <b>Product:</b> {product.title}
-                                        </ProductName>
-                                        <ProductId>
-                                            <b>ID:</b> {product.id}
-                                        </ProductId>
-                                  
-                                    </Details>
-                                </ProductDetail>
-                                <PriceDetail>
-                                    <ProductAmountContainer>
-                                    <Add />
-                                    <ProductAmount>{product.quantity}</ProductAmount>
-                                    <Remove />
-                                    </ProductAmountContainer>
-                                    <ProductPrice>$ {product.price*product.quantity}</ProductPrice>
-                                </PriceDetail>
-                            </Product>
-
+                            <CartItem product={product} key={product.id}/>
                         ))}
-                            <Hr />
+                    
                                      
                         </Info>
 
@@ -262,7 +171,7 @@ const Cart = () => {
 
                             <SummaryItem>
                                 <SummaryItemText>Subtotal</SummaryItemText>
-                                <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
+                                <SummaryItemPrice>$ {cart.total.toFixed(2)}</SummaryItemPrice>
                             </SummaryItem>
                             <SummaryItem>
                                 <SummaryItemText>Estimated Shipping</SummaryItemText>
