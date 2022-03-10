@@ -14,6 +14,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import {addProductByOne, removeProductByOne} from '../redux/cartSlice'
 
 
+const Container = styled.div`
+    .detail-img{
+        flex: 1;
+    }
+    .detail-text{
+        flex: 4;
+
+        .detail-text-amountAndPrice{
+            display:flex ;
+
+        }
+    }
+`
 const CartProduct = styled.div`
     display: flex;
     justify-content: space-between;
@@ -22,14 +35,16 @@ const CartProduct = styled.div`
 `;
 
 // bottom left  > left
-const ProductDetail = styled.div`
-    flex:2;
+const ProductImg = styled.div`
+    padding:0 20px 20px 20px;
+    width:30% ;
+    margin:auto ;
 
-    display: flex;
+    ${tablet({ padding: "10px" })}
 `;
 // bottom left  > left > left
 const Image = styled.img`
-    width: 200px;
+    width: 100%;
 `;
 // bottom left  > left > right
 const Details = styled.div`
@@ -41,7 +56,9 @@ const Details = styled.div`
 
 const ProductName = styled.span``;
 
-const ProductId = styled.span``;
+const ProductId = styled.span`
+    margin:15px 0 ;
+`;
 
 const ProductColor = styled.div`
     width: 20px;
@@ -54,13 +71,16 @@ const ProductColor = styled.div`
 const ProductSize = styled.span``;
 
 // bottom left  > right
-const PriceDetail = styled.div`
-    flex:1;
+const ProductText = styled.div`
+    padding:20px 10px 100px 20px ;
 
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-evenly;
+    align-items: flex-start;
     flex-direction: column;
+    
+
+    ${tablet({ padding:"20px 40px" })}
 
 `;
 
@@ -68,22 +88,29 @@ const ProductAmountContainer = styled.div`
     display: flex;
     align-items: center;
 
-    margin-bottom: 20px;
+    margin-right: 20px;
 `;
 
 const ProductAmount = styled.div`
-    font-size: 24px;
-    margin: 5px;
+    width: 30px;
+    height: 30px;
 
-    ${tablet({ margin: "5px 15px" })}
+    border-radius: 5px;
+    border: 1px solid var(--main-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px 5px;
+
+    ${mobile({ margin: "5px 10px" })}
 
 `;
 
-const ProductPrice = styled.div`
-    font-size: 30px;
-    font-weight: 200;
-    
-    ${tablet({ marginBottom: "20px" })}
+const ProductPrice = styled.h5`
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin: 5px;
+
 `;
 const Hr = styled.hr`
    background-color: #eee;
@@ -114,31 +141,40 @@ const CartItem = ({product}) => {
     }
 
   return (
-    <CartProduct>
-        <ProductDetail>
-            <Link to={`/product/${product.id}`} className="react-link">
-                <Image src={product.image} />
-            </Link>
-            <Details>
-                <ProductName>
-                    <b>Product:</b> {product.title}
-                </ProductName>
-                <ProductId>
-                    <b>ID:</b> {product.id}
-                </ProductId>
+      <Container>
+        <CartProduct>
+            <ProductImg className='detail-img'>
+                <Link to={`/product/${product.id}`} className="react-link">
+                    <Image src={product.image} />
+                </Link>
+            </ProductImg>
+
+            <ProductText className='detail-text'>
+                <Details className='detail-text-nameAndId'>
+                    <ProductName>
+                        <b>Product:</b> {product.title}
+                    </ProductName>
+                    <ProductId>
+                        <b>ID:</b> {product.id}
+                    </ProductId>
+                </Details>
+
+                <div className='detail-text-amountAndPrice'>
+                    <ProductAmountContainer>
+                        <Add onClick={()=>handleAddToCartByOne()}/>
+                        <ProductAmount>{product.quantity}</ProductAmount>
+                        <Remove onClick={()=>handleRemoveFromCartByOne()}/>
+                    </ProductAmountContainer>
         
-            </Details>
-        </ProductDetail>
-        <PriceDetail>
-            <ProductAmountContainer>
-            <Add onClick={()=>handleAddToCartByOne()}/>
-            <ProductAmount>{product.quantity}</ProductAmount>
-            <Remove onClick={()=>handleRemoveFromCartByOne()}/>
-            </ProductAmountContainer>
-            <ProductPrice>$ {(product.price*product.quantity).toFixed(2)}</ProductPrice>
-        </PriceDetail>
+                    <ProductPrice>$ {(product.price*product.quantity).toFixed(2)}</ProductPrice>
+                </div>
+
+            </ProductText>
+        </CartProduct>
+
         <Hr />
-    </CartProduct>
+
+      </Container>
   )
 }
 

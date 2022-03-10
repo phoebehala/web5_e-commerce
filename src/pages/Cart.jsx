@@ -84,6 +84,7 @@ const Bottom = styled.div`
 // bottom left
 const Info = styled.div`
     flex:3;
+    margin-top:20px ;
 `;
 
 
