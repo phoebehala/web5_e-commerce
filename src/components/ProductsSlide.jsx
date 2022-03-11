@@ -11,7 +11,7 @@ import Product from './Product';
 import { ArrowBackIosOutlined, ArrowForwardIosOutlined } from '@material-ui/icons';
 
 // data
-import {suggestedProducts} from '../data/data'
+import {myProducts} from '../data/data'
 
 const Container = styled.div`
     width: 100%;
@@ -108,7 +108,7 @@ const ProductsSlide = () => {
 
             <SlideContainer ref={slideRef}>
     
-                {suggestedProducts.map((sp)=>(
+                {myProducts.map((sp)=>(
                       <Product key={sp.id} item={sp}/>
                 ))}
 

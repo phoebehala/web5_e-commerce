@@ -1,5 +1,6 @@
 import React, { useRef } from 'react'
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 // style
 import styled from 'styled-components';
@@ -7,7 +8,8 @@ import {mobile, tablet} from '../util/responsive';
 
 //icons
 import {  Star, StarHalf } from '@material-ui/icons';
-import { KeyboardArrowDown, KeyboardArrowUp } from '@material-ui/icons';
+import { KeyboardArrowDown, KeyboardArrowUp,  FavoriteBorderOutlined } from '@material-ui/icons';
+import { Add, Remove } from "@material-ui/icons";
 
 // components
 import Navbar from '../components/Navbar.jsx';
@@ -18,6 +20,11 @@ import Products from '../components/Products';
 // data
 import {myProducts} from '../data/data'
 
+
+// redux
+import { useDispatch } from 'react-redux';
+import { addProduct } from '../redux/cartSlice';
+import {addToWishlist} from '../redux/wishlistSlice';
 
 
 const TopWrapper = styled.div`
@@ -135,15 +142,59 @@ const ThumbImg = styled.img`
     border-radius: 5px;
     
 `
+const AddContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 60%;
+    margin-top: 10px;
+    ${mobile({ width: "100%" })}
+
+`;
+
+const AmountContainer = styled.div`
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    margin-right:10px ;
+`;
+const Amount = styled.span`
+    width: 30px;
+    height: 30px;
+
+    border-radius: 5px;
+    border: 1px solid var(--main-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px 5px;
+`;
 const AddToCartBtn = styled.button`
-    background: #333;
+    background: var(--main-color);
     color: white;
     outline: none;
     border: none;
     cursor: pointer;
     padding: 10px 25px;
-    margin-top: 15px;
 `
+const Icon = styled.div`
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 10px;
+
+    transition: all 0.5s ease;
+    &:hover {
+        transform: scale(1.1);
+      }
+`;
+
 
 // bottom
 const ShowMoreWrapper = styled.div`
@@ -176,10 +227,22 @@ const InfoDesc = styled.p`
 
 const ProductDetailsDummy = () => {
 
+    /* dummy solution 
+        to get the productID a user clicked from slider to see the detail
+        myProducts[productId] is the product shown in the page*/
+    const location = useLocation();
+    console.log(location ); //  "/product/dummy/2"
+    const productId = location.pathname.split("/")[3];
+    console.log(productId);
+    
+    const [quantity, setQuantity] = useState(1);
+
+    // redux  // let it know addProduct() is redux reducer function
+    const dispatch = useDispatch()
+
     // for rating
     let increment =0;
     let max =5;
-
 
     const [choosedindex, setChoosedIndex] = useState(0);
 
@@ -223,6 +286,33 @@ const ProductDetailsDummy = () => {
         console.log(toggle);
     }
 
+    const handleQuantity = (type)=>{
+        if (type==="dec"){
+            quantity>1 && setQuantity(quantity-1)
+        }else{
+            setQuantity(quantity+1)
+        }
+    }
+    const handleAddToCart =()=>{
+        dispatch(// dispatch action
+                //addProduct({product:product, quantity:quantity, subTotal:product.price*quantity})
+    
+            addProduct({
+                ...myProducts[productId],  // copy all product info such as quantity, color, size, price....
+                quantity:quantity,    // override by the total quantity the user has added     const [quantity, setQuantity] = useState(1);
+            })
+        )
+    }
+
+    const handleAddToWishlist =()=>{
+        dispatch(// dispatch action
+          addToWishlist({
+              ...myProducts[productId],  // copy all product info such as quantity, color, size, price....
+              quantity:1,    // override by the quantity by 1
+          })
+        )
+      }
+
   return (
     <>
 
@@ -231,46 +321,44 @@ const ProductDetailsDummy = () => {
 
     <TopWrapper>
 
-    {
-      myProducts.map(item =>(
-        <Details key={item._id}>
+        <Details key={productId}>
 
           <BigImgWrapper>
             {/* <BigImg src={item.src[index]} alt=""/> */}
-            <BigImg src={item.src[choosedindex]} alt=""/>
+            <BigImg src={myProducts[productId].src[choosedindex]} alt=""/>
           </BigImgWrapper>
 
           <Box>
             <Row>
-              <RowH2Title>{item.title}</RowH2Title>
+              <RowH2Title>{myProducts[productId].title}</RowH2Title>
             </Row>
 
-            <Price>${item.price}</Price>
+            <Price>${myProducts[productId].price}</Price>
 
             {/* <Colors colors={item.colors} /> */}
             <Colors>
-                {item.colors.map((c,i) =>(
+                {myProducts[productId].colors.map((c,i) =>(
                     // <ClickColorBtn style={{background:c}} key={index}>{c}</ClickColorBtn>
                     <ClickColorBtn style={{background:c}} key={i}></ClickColorBtn>
                 ))}
             </Colors>
 
             <RateWrapper>
-                <RateScore>{item.rating.rate}</RateScore>
+                <RateScore>{myProducts[productId].rating.rate}</RateScore>
                 <RateStars>
                     <RateStar>
                      { [...Array(5)].map((star, index) => {
 
-                       while(increment < item.rating.rate) {
+                       while(increment < myProducts[productId].rating.rate) {
 
-                          if ((item.rating.rate-increment)<1){
+                          if ((myProducts[productId]-increment)<1){
                             increment++;
                             return (<StarHalf style={{color:"#e59819"}}></StarHalf>)
                           }
                           increment++;
                           return (<Star style={{color:"#e59819"}}></Star>)
                       }
-                      while(max > item.rating.rate) {        
+                      while(max > myProducts[productId]) {        
                           max--;
                        
                           return (<Star style={{color:"gray"}}></Star>)
@@ -284,23 +372,35 @@ const ProductDetailsDummy = () => {
                 <RateReviewerNum>(222)</RateReviewerNum>
             </RateWrapper>
 
-            <Desc>{item.description}</Desc>
-            <Desc>{item.content}</Desc>
+            <Desc>{myProducts[productId].description}</Desc>
+            <Desc>{myProducts[productId].content}</Desc>
 
             <Thumb ref={thumbRef} >
-                {item.src.map((image,i)=>(
+                {myProducts[productId].src.map((image,i)=>(
                     <ThumbImg src={image} alt="" key={i}
                                  onClick={()=>handleClick(i)} 
                                  />
                 ))}   
             </Thumb>
-            <AddToCartBtn>Add to cart</AddToCartBtn>
+
+            <AddContainer>
+                <AmountContainer>
+                    <Remove onClick={()=>handleQuantity("dec")}/>
+                    <Amount>{quantity}</Amount>
+                    <Add onClick={()=>handleQuantity("inc")}/>
+                </AmountContainer>
+                <AddToCartBtn onClick={()=>handleAddToCart()}>ADD TO CART</AddToCartBtn>
+                <Icon>
+                    <FavoriteBorderOutlined onClick={()=>handleAddToWishlist()}
+                                            style={{width:"35px", height:"100%"}}/>
+                </Icon>
+            </AddContainer>
+
           </Box>
 
         </Details>
 
-      ))
-    }
+    
     </TopWrapper>
 
     <ShowMoreWrapper>
