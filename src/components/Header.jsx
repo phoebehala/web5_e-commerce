@@ -48,7 +48,7 @@ const header = () => {
   return (
     <Container>
  
-        <Bg src="https://i.pinimg.com/564x/6f/64/b5/6f64b519fade0a893e906c6155bbce34.jpg" alt="" />
+        <Bg src="images/headerPhoto.jpeg" alt="clothes" />
      
         <HeaderInfo>
             <Link to="./products" className='react-link'>
