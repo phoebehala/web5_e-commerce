@@ -2,6 +2,10 @@ fakestoreapi (user login)
     username: "mor_2314",
     password: "83r5^_"
 
+
+images src: https://au.lattelierstore.com/
+            https://i.pinimg.com/474x/02/72/bb/0272bbd458acaac3c6761222effc6463.jpg
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
