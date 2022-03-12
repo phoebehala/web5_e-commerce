@@ -37,7 +37,7 @@ const Container = styled.div`
     flex:1;
     margin: 3px;
     height: 70vh;
-
+    
     position: relative;
 
     transition: all .3s ease-in-out;
@@ -80,16 +80,16 @@ const Title = styled.h1`
 
 
 
-const CategoryItem = ( {item, key} ) => {
+const CategoryItem = ( {item} ) => {
     return (
         <Container>
-            <Link to= {`/products/${item.cat}`} >
-                <Image src={item.img}/>
-                <Info>
-                    <Title>{item.title}</Title>
+            <Image src={item.img}/>
+            <Info>
+                <Title>{item.title}</Title>
+                <Link to= {`/products/${item.cat}`} >
                     <Button>SHOP NOW</Button>
-                </Info> 
-            </Link>
+                </Link>
+            </Info> 
         </Container>
       );
 };
