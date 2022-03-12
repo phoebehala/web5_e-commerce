@@ -80,7 +80,7 @@ const Colors = styled.div``
 const ClickColorBtn = styled.button`
     width: 30px;
     height: 30px;
-    border: none;
+    border: 1px var(--light-gray) double;
     outline: none;
     margin-right: 5px;
     cursor: pointer;
@@ -127,7 +127,7 @@ const Thumb = styled.div`
     margin: 10px 0;
 
     &>:first-child{
-        border: 1px solid var(--vintage-red);
+        border: 2px solid var(--light-gray);
         opacity: 1;
     }
 `
@@ -275,7 +275,7 @@ const ProductDetailsDummy = () => {
             images[i].style.border=`none`
         }
         images[index].style.opacity=`1`
-        images[index].style.border=` 1px solid var(--vintage-red)`
+        // images[index].style.border=` 1px solid var(--vintage-red)`
   
         
     }
