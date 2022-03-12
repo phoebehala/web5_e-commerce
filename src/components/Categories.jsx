@@ -1,4 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+
+import axios from 'axios'
+
 
 // style
 import styled from 'styled-components';
@@ -19,10 +22,26 @@ const Container = styled.div`
 
 
 const Categories = () => {
+  // const [categories , setCategories] = useState();
+
+  // useEffect( ()=>{
+  //   // make a request to API
+  //   const getCategories = async ()=>{                                                    
+  //       try {
+  //           const res = await axios.get(`https://fakestoreapi.com/products/categories/`)                             
+  //           console.log(res);
+  //           setCategories(res.data);
+  //       } catch (error) {    
+
+  //       }
+  //   }
+  //   getCategories()
+  // },[]) // fire the func once 
+
   return (
     <Container>
-        {categories.map((item)=>(
-              <CategoryItem item={item} key={item.id}/>
+        {categories && categories.map((item)=>(
+              <CategoryItem item={item}/>
           ))}
     </Container>
   )
