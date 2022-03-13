@@ -11,6 +11,9 @@ import {Button} from '@material-ui/core';
 import { Delete, FavoriteBorderOutlined, RemoveCircle, RemoveCircleOutline } from '@material-ui/icons';
 import { Add, Remove } from "@material-ui/icons";
 
+// materialUI components
+import Tooltip from '@mui/material/Tooltip';
+
 // redux
 import { useDispatch } from 'react-redux';
 import { addProduct } from '../redux/cartSlice';
@@ -144,8 +147,10 @@ const WishlistItem = ({item}) => {
         <Top>
             <h3>{item.title}</h3>
             <span>
-                <RemoveCircle style={{width:"30px", height:"30px"}}
+                <Tooltip title="Remove From Whishlist">
+                    <RemoveCircle style={{width:"30px", height:"30px"}}
                                 onClick={()=>handleRemovFromWishlist()}/>
+                </Tooltip>
             </span>
         </Top>
 

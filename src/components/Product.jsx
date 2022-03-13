@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 
 // style
 import styled from 'styled-components';
+// materialUI components
+import Tooltip from '@mui/material/Tooltip';
 
 // redux
 import { useDispatch } from 'react-redux';
@@ -207,19 +209,25 @@ const Product = ({key,item}) => {
        
             {isHovered && (
               <Info >
-                  <Icon>
-                      <ShoppingCartOutlined onClick={()=>handleAddToCart()}/>
-                  </Icon>
+                  <Tooltip title="Add to Cart">
+                    <Icon>
+                        <ShoppingCartOutlined onClick={()=>handleAddToCart()}/>
+                    </Icon>
+                  </Tooltip>
 
-                  <Icon>
-                    <Link to={`/product/dummy/${item.id}`} className="react-link">
-                      <SearchOutlined />
-                    </Link>
-                  </Icon>
+                  <Tooltip title="See Details">
+                    <Icon>
+                      <Link to={`/product/dummy/${item.id}`} className="react-link">
+                        <SearchOutlined />
+                      </Link>
+                    </Icon>
+                  </Tooltip>
 
-                  <Icon>
-                      <FavoriteBorderOutlined onClick={()=>handleAddToWishlist()}/>
-                  </Icon>
+                  <Tooltip title="Add to Wishlist">
+                    <Icon>
+                        <FavoriteBorderOutlined onClick={()=>handleAddToWishlist()}/>
+                    </Icon>
+                  </Tooltip>
                   
               </Info>
             )}

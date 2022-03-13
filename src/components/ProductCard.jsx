@@ -6,6 +6,8 @@ import styled from 'styled-components';
 import {mobile, tablet} from '../util/responsive';
 // icons
 import { FavoriteBorderOutlined, SearchOutlined, ShoppingCartOutlined, Star, StarHalf } from '@material-ui/icons';
+// materialUI components
+import Tooltip from '@mui/material/Tooltip';
 
 // redux
 import { useDispatch } from 'react-redux';
@@ -242,17 +244,24 @@ const ProductCard = ({item}) => {
                 {item.mark &&<Mark>{item.mark}</Mark> }
             </TextWrapper>     
         <Info >
-            <Icon>
-                <ShoppingCartOutlined onClick={()=>handleAddToCart()} />
-            </Icon>
-            <Icon>
-              <Link to={`/product/${item.id}`} className="react-link">
-                <SearchOutlined />
-              </Link>
-            </Icon>
-            <Icon>
-                <FavoriteBorderOutlined onClick={()=>handleAddToWishlist()}/>
-            </Icon>
+            <Tooltip title="Add to Cart">
+                <Icon>
+                    <ShoppingCartOutlined onClick={()=>handleAddToCart()} />
+                </Icon>
+            </Tooltip>
+            <Tooltip title="See Details">
+                <Icon>
+                  <Link to={`/product/${item.id}`} className="react-link">
+                    <SearchOutlined />
+                  </Link>
+                </Icon>
+            </Tooltip>
+
+            <Tooltip title="Add to Wishlist">
+              <Icon>
+                  <FavoriteBorderOutlined onClick={()=>handleAddToWishlist()}/>
+              </Icon>
+            </Tooltip>
         </Info>
     
    
