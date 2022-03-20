@@ -200,7 +200,7 @@ const Product = ({key,item}) => {
 
 
   return (
-    <Container  style={{left: isHovered && (50+item.id*(300+10)-50) }}
+    <Container  style={{left: isHovered && (item.id*(300+10)-50) }}
                 onMouseEnter={()=>{ setIsHovered(true)}}
                 onMouseLeave={()=>{ setIsHovered(false)}}
     >
