@@ -86,7 +86,7 @@ const ProductsSlide = () => {
             console.log(slideRef.current.style);
             slideRef.current.style.transform=`translateX(${310+distance}px)`  // update refernece value  // to think like this: reset the translateX( ..px) instead of moving forward by ..px  
         }
-        if(direction==="right" && slideNumber<4 ){
+        if(direction==="right" && slideNumber<3 ){
             setSlideNumber(slideNumber+1)
 
             console.log(slideRef.current.style);
