@@ -20,10 +20,11 @@ const Container = styled.div`
 `;
 
 const Title = styled.span`
-    font-size: 20px;
-    font-weight: 500;
-    margin-left: 20px;
-
+    font-size: 2rem;
+    font-weight: 800;
+    padding: 6rem 0 0.8rem;
+    margin-left:20px;
+    letter-spacing: 0.5px;
 `
 const Wrapper = styled.div`
   position: relative;  /* for children's position: absolute; */
