@@ -161,9 +161,9 @@ const CartItem = ({product}) => {
 
                 <div className='detail-text-amountAndPrice'>
                     <ProductAmountContainer>
-                        <Add onClick={()=>handleAddToCartByOne()}/>
-                        <ProductAmount>{product.quantity}</ProductAmount>
                         <Remove onClick={()=>handleRemoveFromCartByOne()}/>
+                        <ProductAmount>{product.quantity}</ProductAmount>
+                        <Add onClick={()=>handleAddToCartByOne()}/>
                     </ProductAmountContainer>
         
                     <ProductPrice>$ {(product.price*product.quantity).toFixed(2)}</ProductPrice>
