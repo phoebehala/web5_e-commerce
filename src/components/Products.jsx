@@ -5,9 +5,16 @@ import axios from 'axios'
 import styled from 'styled-components';
 import {mobile, tablet} from '../util/responsive';
 
+// marterial UI
+import { LinearProgress } from '@material-ui/core';
+
+// redux
+import {fetchStart, fetchSuccess, fetchFailure} from '../redux/fetchStatusSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 // component
 import ProductCard from './ProductCard';
+
 
 const Container = styled.div`
     padding: 30px;
@@ -24,19 +31,33 @@ const Products = ( { cat, sort } ) => {
    const [filteredProducts , setFilteredProducts] = useState([])
    console.log('filteredProducts',filteredProducts);
 
+   const dispatch = useDispatch()
+   const isFeching = useSelector(state=>state.fetchStatus.isFetching)
+   const error = useSelector(state=>state.fetchStatus.error)
+   const isSuccess = useSelector(state=>state.fetchStatus.isSuccess)
+
+   const getProducts = async ()=>{                                                    
+       try {
+           const res = await axios.get(cat? `https://fakestoreapi.com/products/category/${cat}`
+                                           : "https://fakestoreapi.com/products/")
+           console.log(res);
+           setProducts(res.data);
+           dispatch(
+            fetchSuccess()
+           )
+       } catch (error) {  
+          dispatch(
+            fetchFailure()
+          )
+       }
+   }
    useEffect( ()=>{
-        // make a request to API
-        const getProducts = async ()=>{                                                    
-            try {
-                const res = await axios.get(cat? `https://fakestoreapi.com/products/category/${cat}`
-                                                : "https://fakestoreapi.com/products/")
-                console.log(res);
-                setProducts(res.data);
-               
-            } catch (error) {              
-            }
-        }
+     // make a request to API
         getProducts()
+        
+        dispatch(
+          fetchStart()
+        )
    },[cat]) // whenever cat get changed, fire the function)
 
 
@@ -79,8 +100,14 @@ const Products = ( { cat, sort } ) => {
     
   }, [sort]); // whenever sort get changed, fire the function)
 
+  
+  if (isFeching) return <LinearProgress />;
+ 
+
   return (
+
     <Container>
+      {error && (<h1> Something went wrong, please try again later</h1>)}
         
          {filteredProducts.map((item) => <ProductCard item={item} key={item.id} />)}
    

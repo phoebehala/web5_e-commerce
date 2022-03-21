@@ -14,6 +14,8 @@ import {  Star, StarHalf } from '@material-ui/icons';
 import { KeyboardArrowDown, KeyboardArrowUp, FavoriteBorderOutlined } from '@material-ui/icons';
 import { Add, Remove } from "@material-ui/icons";
 
+// marterial UI
+import { LinearProgress } from '@material-ui/core';
 
 // components
 import Navbar from '../components/Navbar.jsx';
@@ -25,10 +27,10 @@ import Products from '../components/Products';
 import {myProducts} from '../data/data'
 
 // redux
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addProduct } from '../redux/cartSlice';
 import {addToWishlist} from '../redux/wishlistSlice';
-
+import {fetchStart, fetchSuccess, fetchFailure} from '../redux/fetchStatusSlice';
 
 
 const TopWrapper = styled.div`
@@ -257,20 +259,33 @@ const ProductDetails = () => {
 
     // redux  // let it know addProduct() is redux reducer function
     const dispatch = useDispatch()
+    const isFeching = useSelector(state=>state.fetchStatus.isFetching)
+    const error = useSelector(state=>state.fetchStatus.error)
+    const isSuccess = useSelector(state=>state.fetchStatus.isSuccess)
 
 
     useEffect(() => {
-        const getProduct = async () => {
+        const getProductDetails = async () => {
           try {
             const res = await axios.get("https://fakestoreapi.com/products/" + productId );
             setProduct(res.data);
+            dispatch(
+                fetchFailure()
+            )
 
-          } catch {}
+          } catch {
+            dispatch(
+                fetchSuccess()
+            )
+          }
         };
-        getProduct();
+        getProductDetails();
         console.log(product);
         // console.log(product.rating);
         // console.log(product.rating.rate);
+        dispatch(
+            fetchStart()
+        )
     }, [productId ]);
 
 
@@ -339,6 +354,7 @@ const ProductDetails = () => {
 
 
 
+if (isFeching) return <LinearProgress />;
 
   return (
     <>
