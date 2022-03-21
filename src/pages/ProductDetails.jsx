@@ -39,7 +39,6 @@ const TopWrapper = styled.div`
     margin: 100px auto;
     margin-bottom:0px ;
     box-shadow: 0 0 5px #ccc;
-
 `
 const Details = styled.div`
     display: flex;

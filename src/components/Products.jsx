@@ -105,7 +105,6 @@ const Products = ( { cat, sort } ) => {
  
 
   return (
-
     <Container>
       {error && (<h1> Something went wrong, please try again later</h1>)}
         

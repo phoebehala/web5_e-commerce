@@ -6,7 +6,6 @@ import userReducer from "./userSlice";
 import wishlistReducer from "./wishlistSlice"
 import fetchStatusReducer from "./fetchStatusSlice"
 
-
 import {
     persistStore,
     persistReducer,
