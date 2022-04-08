@@ -6,6 +6,8 @@ import axios from 'axios'
 // style
 import styled from 'styled-components';
 import {mobile, tablet} from '../util/responsive';
+
+// components
 import CategoryItem from './CategoryItem';
 
 //data
