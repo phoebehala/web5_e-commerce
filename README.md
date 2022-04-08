@@ -40,11 +40,27 @@
 #### cart 
 - ADD / REMOVE items to/from  cart
 - EDIT amount of items
+###### redux - cartSlice
+<img width="963" alt="web5_E-commerce_cartSlice" src="https://user-images.githubusercontent.com/83237024/162543427-57838d6f-9b3d-4d03-9942-63fe28c2dd01.png">
+
 #### whishlist
 - ADD / REMOVE items to/from whishlist
 - ADD items of the whishlist to the cart
+###### redux - wishlistSlice
+<img width="965" alt="web5_E-commerce_wishListSlice" src="https://user-images.githubusercontent.com/83237024/162543332-8821ebf3-c9ab-4129-9be0-a46cd49b495e.png">
+
 #### login / logout
 - Storing user info for the usage across app
+###### redux - userSlice
+<img width="964" alt="web5_E-commerce_userSlice" src="https://user-images.githubusercontent.com/83237024/162543064-bd226e5d-09a4-45fc-b4c9-d96e4418b4b9.png">
+
+#### For every one
+<img width="986" alt="web5_E-commerce_every-one" src="https://user-images.githubusercontent.com/83237024/162544958-618aca29-cc7b-477e-b7ab-4e572d4550f7.png">
+
+#### For a user who has registered and logged in
+<img width="988" alt="web5_E-commerce_logged-in-user" src="https://user-images.githubusercontent.com/83237024/162544956-926bd13c-5d53-470c-b405-200af86351fe.png">
+
+
 #### rating 
 - created by pure react
 - Showing rating score as per data
@@ -62,14 +78,6 @@
 one is displaying data from API
 one is displaying data from dummy data (this kind of product detail page has more than one pictures)
 
-#### redux
-###### cartSlice
-<img width="963" alt="web5_E-commerce_cartSlice" src="https://user-images.githubusercontent.com/83237024/162543427-57838d6f-9b3d-4d03-9942-63fe28c2dd01.png">
-
-###### wishlistSlice
-<img width="965" alt="web5_E-commerce_wishListSlice" src="https://user-images.githubusercontent.com/83237024/162543332-8821ebf3-c9ab-4129-9be0-a46cd49b495e.png">
-###### userSlice
-<img width="964" alt="web5_E-commerce_userSlice" src="https://user-images.githubusercontent.com/83237024/162543064-bd226e5d-09a4-45fc-b4c9-d96e4418b4b9.png">
 
 ## Screenshots
 ![Example screenshot](./img/screenshot.png)
