@@ -42,7 +42,7 @@
 - EDIT amount of items
 #### whishlist
 - ADD / REMOVE items to/from whishlist
-- ADD items in the whishlist to the cart
+- ADD items of the whishlist to the cart
 #### login / logout
 - Storing user info for the usage across app
 #### rating 
@@ -62,6 +62,14 @@
 one is displaying data from API
 one is displaying data from dummy data (this kind of product detail page has more than one pictures)
 
+#### redux
+###### cartSlice
+<img width="963" alt="web5_E-commerce_cartSlice" src="https://user-images.githubusercontent.com/83237024/162543427-57838d6f-9b3d-4d03-9942-63fe28c2dd01.png">
+
+###### wishlistSlice
+<img width="965" alt="web5_E-commerce_wishListSlice" src="https://user-images.githubusercontent.com/83237024/162543332-8821ebf3-c9ab-4129-9be0-a46cd49b495e.png">
+###### userSlice
+<img width="964" alt="web5_E-commerce_userSlice" src="https://user-images.githubusercontent.com/83237024/162543064-bd226e5d-09a4-45fc-b4c9-d96e4418b4b9.png">
 
 ## Screenshots
 ![Example screenshot](./img/screenshot.png)
