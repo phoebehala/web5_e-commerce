@@ -5,7 +5,7 @@
 ## Table of Contents
 * [General Info](#general-information)
 * [Technologies Used](#technologies-used)
-* [Features & Challenges](#features)
+* [Features & Challenges](#features--challenges)
 * [Screenshots](#screenshots)
 * [API Source](#API-Source)
 * [Usage](#usage)
@@ -61,6 +61,10 @@
 - Because of the limited info from data base, I made two kinds of product detail page:
 one is displaying data from API
 one is displaying data from dummy data (this kind of product detail page has more than one pictures)
+
+
+## Screenshots
+![Example screenshot](./img/screenshot.png)
 
 ## API Source
 - fake store api
