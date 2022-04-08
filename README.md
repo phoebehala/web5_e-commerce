@@ -71,7 +71,7 @@ one is displaying data from dummy data (this kind of product detail page has mor
 
 
 ## Usage
-please user fakestore api user to log in. Here is one of them:
+Please use fakestore api user to log in. Here is one of them:
 ```
 username: "mor_2314",
 password: "83r5^_"
