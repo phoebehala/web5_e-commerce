@@ -12,7 +12,7 @@
 
 ## General Information
 ### Idea / Motivation
-- To create an e-commerce website that is 
+- To create an e-commerce website
 ### Purposes / Intentions
 - To consolidate the usage of redux, useState, useRef, react-router-dom
 - To work with API
@@ -58,14 +58,20 @@
 - To show the corresponding picture that a user clicks on the smaller picture
 - ADD certain amount of items to the cart
 - TOGGLE feature to see more information
+- Because of the limited info from data base, I made two kinds of product detail page:
+one is displaying data from API
+one is displaying data from dummy data (this kind of product detail page has more than one pictures)
+
 ## API Source
 - fake store api
+
 
 ## Usage
 please user fakestore api user to log in. Here is one of them:
 ```
-    username: "mor_2314",
-    password: "83r5^_"
+username: "mor_2314",
+password: "83r5^_"
 ```
+
 
 
