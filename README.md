@@ -54,21 +54,21 @@
 ###### redux - userSlice
 <img width="964" alt="web5_E-commerce_userSlice" src="https://user-images.githubusercontent.com/83237024/162543064-bd226e5d-09a4-45fc-b4c9-d96e4418b4b9.png">
 
-#### For every one
+###### For every one
 <img width="986" alt="web5_E-commerce_every-one" src="https://user-images.githubusercontent.com/83237024/162544958-618aca29-cc7b-477e-b7ab-4e572d4550f7.png">
 
-#### For a user who has registered and logged in
+###### For a user who has registered and logged in
 <img width="988" alt="web5_E-commerce_logged-in-user" src="https://user-images.githubusercontent.com/83237024/162544956-926bd13c-5d53-470c-b405-200af86351fe.png">
 
 
-#### rating 
+#### Rating 
 - created by pure react
 - Showing rating score as per data
 #### Fetching data
 - Showing data by categories
 - Showing detail by single product 
 - Sorting data by popularity / rating / price
-#### slider for the showcase of products
+#### Slider for the showcase of products
 - created by pure react
 #### product detail page
 - To show the corresponding picture that a user clicks on the smaller picture
@@ -78,6 +78,12 @@
 one is displaying data from API
 one is displaying data from dummy data (this kind of product detail page has more than one pictures)
 
+#### React route
+###### Home page
+<img width="671" alt="web5_E-commerce_react-route-Home-page" src="https://user-images.githubusercontent.com/83237024/162547633-e1221cf4-8471-473b-82a8-8051f9f8fddb.png">
+
+###### ProductList page
+<img width="674" alt="web5_E-commerce_react-route-ProductList-page" src="https://user-images.githubusercontent.com/83237024/162547631-3a189493-7526-4fd9-9ff9-ae26c21c7b19.png">
 
 ## Screenshots
 ![Example screenshot](./img/screenshot.png)
