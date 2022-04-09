@@ -74,9 +74,8 @@
 - To show the corresponding picture that a user clicks on the smaller picture
 - ADD certain amount of items to the cart
 - TOGGLE feature to see more information
-- Because of the limited info from data base, I made two kinds of product detail page:
-one is displaying data from API
-one is displaying data from dummy data (this kind of product detail page has more than one pictures)
+- ```<ProductDetails/>``` is the product detail page displaying data from API. However, because of the limited info from fake store API, I made the other one for practice and
+Which is ```<ProductDetailsDummy />``` displaying dummy data (this kind of product detail page has more than one pictures)
 
 #### React route
 ###### Home page
