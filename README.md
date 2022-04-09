@@ -11,9 +11,9 @@
 * [Usage](#usage)
 
 ## General Information
-### Idea / Motivation
+#### Idea / Motivation
 - To create an e-commerce website
-### Purposes / Intentions
+#### Purposes / Intentions
 - To consolidate the usage of redux, useState, useRef, react-router-dom
 - To work with API
 - To use styled-components
