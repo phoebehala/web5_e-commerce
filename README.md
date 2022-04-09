@@ -22,7 +22,7 @@
 ## Technologies Used
 
 #### react.js
-- react props, useState(), useRef(), react event
+- react props, useState(), useRef(), react events
 - react-router-dom
 
 #### redux
