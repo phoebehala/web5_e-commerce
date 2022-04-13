@@ -42,8 +42,8 @@ const Categories = () => {
 
   return (
     <Container>
-        {categories && categories.map((item)=>(
-              <CategoryItem item={item}/>
+        {categories && categories.map((item,i )=>(
+              <CategoryItem item={item} key={i}/>
           ))}
     </Container>
   )
