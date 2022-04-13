@@ -37,10 +37,12 @@ background-size: cover;
 
 `;
 
+const TopWrapper = styled.div`
+    padding: 20px 50px;
 
-const Brand = styled.div`
+    display: flex;   /* solution for making logo on the top to be clicked: TopWrapper display:flex; +   <Link style={{zIndex:"99"}}>  */
 
-`;
+`
 const Logo = styled.h1`
   font-weight: bold;
   margin-top: 0px;
@@ -166,9 +168,13 @@ const Login = () => {
     }
   return (
         <Container>
-            <Brand>
-                <Logo> HALA </Logo>
-            </Brand>
+
+            <TopWrapper>
+                <Link to="/" className='react-link' style={{zIndex:"99"}}>
+                    <Logo> HALA </Logo>
+                </Link>
+            </TopWrapper>
+
             <LoginWrapper>
                 <LoginForm>
                     <Title>Sign In</Title>

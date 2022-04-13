@@ -37,7 +37,7 @@ const TopWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    
+
 `
 
 const Logo = styled.h1`
@@ -173,7 +173,9 @@ const Register = () => {
   return (
         <Container>
             <TopWrapper>
-                <Logo> HALA </Logo>
+                <Link to="/" className='react-link' style={{zIndex:"99"}}>
+                    <Logo> HALA </Logo>
+                </Link>
                 <Link to="/login" className='react-link' style={{zIndex:"99"}}>    {/* zIndex:"99" >>> because RegisterWrapper is position: absolute;*/}  
                     <LoginBtn>Sign In</LoginBtn>       
                 </Link>
