@@ -8,6 +8,7 @@
 * [Features & Challenges](#features--challenges)
 * [API Source](#API-Source)
 * [Usage](#usage)
+* [Room for Improvement](#room-for-improvement)
 
 ## General Information
 #### Idea / Motivation
@@ -94,6 +95,11 @@ Please use fakestore api user to log in. Here is one of them:
 username: "mor_2314",
 password: "83r5^_"
 ```
+
+## Room for Improvement
+To do:
+- Error handling
+- react-stripe-checkout and order page
 
 
 
