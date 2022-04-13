@@ -51,7 +51,7 @@ const header = () => {
         <Bg src="images/headerPhoto.jpeg" alt="clothes" />
      
         <HeaderInfo>
-            <Link to="./products" className='react-link'>
+            <Link to="/products" className='react-link'>
                 <HeaderBtn>SHOP NOW </HeaderBtn>
             </Link>
         </HeaderInfo>
