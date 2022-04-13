@@ -52,7 +52,7 @@ const Option = styled.option``;
 
 const ProductList = () => {
 
-  const [sort, setSort] = useState("rating");
+  const [sort, setSort] = useState("popularity");
 
   const location = useLocation();
   //console.log('location',location);
