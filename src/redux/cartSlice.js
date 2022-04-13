@@ -10,6 +10,7 @@ const cartSlice = createSlice({
     reducers:{
         addProduct:(state, action)=>{
             // to check if the item has been already added in the cart
+            console.log(state.products);
             const insideItemInCart = state.products.find( item => item.id === action.payload.id)
             console.log('insideItemInCart',insideItemInCart);
 

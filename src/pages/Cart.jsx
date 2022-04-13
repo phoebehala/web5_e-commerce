@@ -21,7 +21,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 // stripe
 // import StripeCheckout from "react-stripe-checkout";
-
+import StripeCheckoutButton from '../components/stripe-button/Stripe-button.component'
 
 
 
@@ -153,7 +153,9 @@ const Cart = () => {
                             <TopText>Shopping Bag({cart.quantity?cart.quantity:"0"})</TopText>
                             <TopText>Your Wishlist ({wishlist.quantity?wishlist.quantity:"0"})</TopText>
                         </TopTexts>
+
                         <TopButton type="filled">CHECKOUT NOW</TopButton>
+                        <StripeCheckoutButton price= {(cart.total).toFixed(2)} />
                     </Top>
 
                     <Bottom>
