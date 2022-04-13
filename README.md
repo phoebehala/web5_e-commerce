@@ -22,7 +22,7 @@
 ## Technologies Used
 
 #### react.js
-- react props, useState(), useRef(), react events
+- react props, useState(), useRef(), react events, useEffect()
 - react-router-dom
 
 #### redux
@@ -84,8 +84,6 @@ wiich is ```<ProductDetailsDummy />``` displaying dummy data (this kind of produ
 ###### ProductList page
 <img width="674" alt="web5_E-commerce_react-route-ProductList-page" src="https://user-images.githubusercontent.com/83237024/162547631-3a189493-7526-4fd9-9ff9-ae26c21c7b19.png">
 
-## Screenshots
-![Example screenshot](./img/screenshot.png)
 
 ## API Source
 - fake store api
