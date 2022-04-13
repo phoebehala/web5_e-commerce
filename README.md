@@ -6,7 +6,6 @@
 * [General Info](#general-information)
 * [Technologies Used](#technologies-used)
 * [Features & Challenges](#features--challenges)
-* [Screenshots](#screenshots)
 * [API Source](#API-Source)
 * [Usage](#usage)
 
