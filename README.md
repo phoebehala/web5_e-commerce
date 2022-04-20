@@ -100,6 +100,7 @@ password: "83r5^_"
 To do:
 - Error handling
 - react-stripe-checkout and order page
+- To fix slider bug
 
 
 
