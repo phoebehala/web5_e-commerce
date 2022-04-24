@@ -78,6 +78,15 @@ const ProductsSlide = () => {
 
         // to access  <SlideContainer></SlideContainer>
         console.log('slideRef.current',slideRef.current); 
+
+        let intFrameWidth = window.innerWidth;
+        let maxPic = Math.floor(intFrameWidth/310)
+        let allowedToClickedCount = 8-maxPic  // 8 >>> total pics for the showcase
+        
+        //console.log({intFrameWidth});
+        //console.log({maxPic});
+        //console.log({allowedToClickedCount});
+        console.log( 'Rect',slideRef.current.getBoundingClientRect());
         let distance = slideRef.current.getBoundingClientRect().x-10   // -10 >>> to get the start position of <container>  // distance >>> to get how far we have gone   //  50 is  margin-left: 50px; of container
         console.log('distance',distance);  
 
@@ -87,7 +96,7 @@ const ProductsSlide = () => {
             console.log(slideRef.current.style);
             slideRef.current.style.transform=`translateX(${310+distance}px)`  // update refernece value  // to think like this: reset the translateX( ..px) instead of moving forward by ..px  
         }
-        if(direction==="right" && slideNumber<3 ){
+        if(direction==="right" && slideNumber< allowedToClickedCount ){
             setSlideNumber(slideNumber+1)
 
             console.log(slideRef.current.style);
